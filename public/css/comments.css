@@ -1,0 +1,65 @@
+/* Commentaires de livres */
+.comments-container {
+    padding: 50px;
+}
+
+.comments-section {
+    margin-bottom: 30px;
+}
+
+.comment-card {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.comment-card h4 {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.comment-card p {
+    font-size: 16px;
+    color: #666;
+}
+
+.comment-card span {
+    color: gold;
+    font-size: 18px;
+}
+
+/* Formulaire de commentaire */
+.add-comment-form {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.add-comment-form textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.submit-btn {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .comment-card {
+        margin-bottom: 20px;
+    }
+}

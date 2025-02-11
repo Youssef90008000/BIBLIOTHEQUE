@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<header>
+    <h1>UTILISATEUR</h1>
+</header>
+<body>
+    <div class="login-container">
+        <h2>Connexion</h2>
+        <form id="loginForm" method="post" action="/login">
+            <div class="input-group">
+                <label for="username">Identifiant</label>
+                <input type="text" id="email" name="email">
+            </div>
+            <div class="input-group">
+                <label for="password">Mot de passe</label>
+                <div class="password-container">
+                    <input type="password" id="password" name="password">
+                    <span id="togglePassword" class="eye-icon">👁️</span>
+                </div>
+            </div>
+            <button type="submit" id="loginBtn">Se connecter</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+/* Dashboard étudiant */
+.dashboard-container {
+    padding: 50px;
+}
+
+.current-borrows,
+.favorite-books {
+    margin-bottom: 50px;
+}
+
+.current-borrows h2,
+.favorite-books h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.favorite-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.favorite-list li {
+    font-size: 18px;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #f4f4f4;
+    border-radius: 5px;
+}
+
+.borrow-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.borrow-table th,
+.borrow-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.borrow-table th {
+    background-color: #f2f2f2;
+}
+
+.borrow-table tr:hover {
+    background-color: #f9f9f9;
+}

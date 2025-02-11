@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commentaires sur les Livres</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="comments-container">
+        <header>
+            <h1>Commentaires sur "L'Étranger"</h1>
+        </header>
+        <section class="comments-section">
+            <div class="comment-card">
+                <h4>Jean Dupont</h4>
+                <p>Un livre captivant, un vrai chef-d'œuvre de Camus !</p>
+                <span>★★★★☆</span>
+            </div>
+            <div class="comment-card">
+                <h4>Marie Curie</h4>
+                <p>Un livre à lire absolument, une belle réflexion sur l'absurde.</p>
+                <span>★★★★★</span>
+            </div>
+        </section>
+
+        <form class="add-comment-form">
+            <h2>Ajouter un commentaire</h2>
+            <textarea rows="4" placeholder="Écrire votre commentaire ici..."></textarea>
+            <br>
+            <label>Votre note :</label>
+            <select>
+                <option value="5">★★★★★</option>
+                <option value="4">★★★★☆</option>
+                <option value="3">★★★☆☆</option>
+                <option value="2">★★☆☆☆</option>
+                <option value="1">★☆☆☆☆</option>
+            </select>
+            <br>
+            <button type="submit" class="submit-btn">Envoyer</button>
+        </form>
+    </div>
+</body>
+</html>
