@@ -1,22 +1,37 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Détails du Livre</title>
-    <link rel="stylesheet" href="/css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= book.title %> - Détails</title>
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <div class="form-container">
-        <div class="book-details">
-            <h2>Titre du livre : L'Étranger</h2>
-            <p><strong>Auteur :</strong> Albert Camus</p>
-            <p><strong>ISBN :</strong> 123456789</p>
-            <p><strong>Genre :</strong> Littérature</p>
-            <p><strong>Exemplaires disponibles :</strong> 5</p>
-            <p><strong>Description :</strong> Un roman majeur de la littérature française, qui traite de l'absurdité de la vie à travers les yeux de Meursault...</p>
-            <button class="submit-btn">Emprunter</button>
-        </div>
+  <header>
+    <h1>Détails du livre</h1>
+    <nav>
+      <ul>
+        <li><a href="/">Accueil</a></li>
+        <li><a href="/livres">Retour à la liste</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="book-details">
+      <img src="<%= book.cover %>" alt="Couverture de <%= book.title %>">
+      <h2><%= book.title %></h2>
+      <p><strong>Auteur :</strong> <%= book.author %></p>
+      <p><strong>Description :</strong> <%= book.description %></p>
+      <p><strong>Date de publication :</strong> <%= book.publication_date.toDateString() %></p>
+      <p><strong>Genre :</strong> <%= book.genre.join(', ') %></p>
+      <p><strong>ISBN :</strong> <%= book.ISBN %></p>
+      <p><strong>Pages :</strong> <%= book.pages %></p>
+      <p><strong>Langue :</strong> <%= book.language %></p>
+      <p><strong>Éditeur :</strong> <%= book.publisher %></p>
+      <p><strong>Format :</strong> <%= book.format %></p>
+      <p><strong>Évaluation :</strong> <%= book.rating %></p>
     </div>
+  </main>
 </body>
 </html>

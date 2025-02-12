@@ -15,8 +15,8 @@ exports.allBooks = async (req, res) => {
 exports.showBook = async (req, res) => {
     const bookId = req.params.id;
     try {
-      const books = await Book.findById(bookId);
-      res.status(200).json(books);
+      const book = await Book.findById(bookId);
+      res.render("pages/details-livre", {book});
     } catch (err) {
       res.status(404).json({ message: err.message });
     }
@@ -41,15 +41,26 @@ exports.showBook = async (req, res) => {
       res.status(404).json({ message: err.message });
     }
   }
- 
+ // Get a book by id
+ exports.updateBookId = async (req, res) => {
+    const bookId = req.params.id;
+    try {
+      const book = await Book.findById(bookId);
+      res.render("pages/update", {book});
+    } catch (err) {
+      res.status(404).json({ message: err.message });
+    }
+  }
+
     // Update a book by id
   exports.updateBook = async (req, res) => {
     const bookId = req.params.id;
+    console.log(req.body);
     try {
       const updatedBook = await Book.findByIdAndUpdate(bookId, req.body, {
-        new: true,
+     new: true,
       });
-      res.status(200).json(updatedBook);
+      res.redirect("/livres");
     } catch (err) {
       res.status(404).json({ message: err.message });
     }

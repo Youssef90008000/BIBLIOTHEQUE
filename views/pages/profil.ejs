@@ -14,8 +14,11 @@
         <section>
             <div class="profile-details">
                 <h2>Informations personnelles</h2>
-                <p><strong>Nom :</strong> Jean Dupont</p>
-                <p><strong>Email :</strong> jean.dupont@example.com</p>
+                <p><strong>Nom :</strong> <%= user.first %> <%= user.last %></p>
+                <p><strong>Email :</strong> <%= user.email %></p>
+                <p><strong>Âge :</strong> <%= user.age || "Non spécifié" %></p>
+                <p><strong>Biographie :</strong> <%= user.bio || "Aucune biographie" %></p>
+                <p><strong>Statut Premium :</strong> <%= user.isPremiumMember ? "Oui" : "Non" %></p>
                 <button class="submit-btn">Modifier le profil</button>
             </div>
         </section>

@@ -457,7 +457,11 @@ footer {
     padding: 20px;
     margin-top: 50px;
 }
-
+li a{
+    list-style-type: none;
+    color: white;
+    
+}
 /* --------- RESPONSIVE DESIGN --------- */
 @media (max-width: 1024px) {
     .nav-links {

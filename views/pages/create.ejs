@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ajouter un Livre</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <h1>Ajouter un Nouveau Livre</h1>
+  <form id="updateForm" action="/books" method="POST">
+    <label for="cover">URL de la couverture:</label>
+    <input type="text" id="cover" name="cover" required>
+    <label for="title">Titre:</label>
+    <input type="text" id="title" name="title" required>
+    <label for="author">Auteur:</label>
+    <input type="text" id="author" name="author" required>
+    <label for="description">Description:</label>
+    <textarea id="description" name="description"></textarea>
+    <label for="genre">Genre (séparé par des virgules):</label>
+    <input type="text" id="genre" name="genre" required>
+    <label for="ISBN">ISBN:</label>
+    <input type="text" id="ISBN" name="ISBN">
+    <button type="submit">Ajouter le Livre</button>
+  </form>
+  <a href="/books">Retour à la liste</a>
+</body>
+
+</html>

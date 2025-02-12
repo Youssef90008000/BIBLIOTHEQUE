@@ -2,6 +2,7 @@
 const User = require("../models/user_models");
 const bcrypt = require("bcrypt");
 
+
 // Get all users
 exports.allUser = async (req, res) => {
   try {
@@ -80,29 +81,33 @@ exports.showLoginForm = (req, res) => {
   res.render('pages/login');
 };
 
-// login
-exports.login =async  (req, res)=>{
-    try {
-        const {email, password} = req.body
-        const user = await User.findOne({email})
-        if(!user) {
-            return res.status(400).json({message: ' email ou mot de passe incorrecte'});
-        } 
+exports.login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
 
-        let isValid = await bcrypt.compare(password, user.password) // true ou false
-        console.log("isValid passsword : " ,isValid)
+    // Vérifier si l'utilisateur existe
+    const user = await User.findOne({email});
+    if (!user) {
+      return res.status(400).json({ message: 'Email ou mot de passe incorrect' });
+    }
 
-        if(!isValid) {
-            return res.status(400).json({message: ' email ou mot de passe incorrecte'});
-        }
-        // Si tout est bon, rediriger vers la page des livres
-        res.redirect("/livres"); 
-        // creer un token 
-        // stocker dans une session
-
-
-    } catch(err){}
-}
+    // Vérifier le mot de passe
+    const isValid = await bcrypt.compare(password, user.password);
+    if (!isValid) {
+      return res.status(400).json({ message: 'Email ou mot de passe incorrect' });
+    }
+    // Stocker uniquement l'ID de l'utilisateur en session
+    req.session.user = user
+    
+    // Redirection vers la page de profil
+    res.redirect('/profil');
+    
+  } catch (err) {
+    console.log(err)
+    console.error("Erreur lors de la connexion :", err);
+    return res.status(500).json({ message: 'Une erreur est survenue, veuillez réessayer plus tard.' });
+  }
+};
 
 
 
@@ -128,5 +133,7 @@ verifyPassword = async (password, hashedPassword) => {
   const isValid = await bcrypt.compare(password, hashedPassword);
   return isValid;
 }
+
+
 
 // Description: Ce fichier contient les fonctions qui sont utilisées pour interagir avec le modèle d'utilisateur.

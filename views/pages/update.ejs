@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modifier le Livre</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <h1>Modifier le Livre</h1>
+  <form action="/update/<%= book._id %>" method="POST">
+    <div>
+      <label for="cover">URL de la couverture :</label>
+      <input type="url" id="cover" name="cover" value="<%= book.cover %>" required>
+    </div>
+    <div>
+      <label for="title">Titre :</label>
+      <input type="text" id="title" name="title" value="<%= book.title %>" required>
+    </div>
+    <div>
+      <label for="author">Auteur :</label>
+      <input type="text" id="author" name="author" value="<%= book.author %>" required>
+    </div>
+    <div>
+      <label for="description">Description :</label>
+      <textarea id="description" name="description" required><%= book.description %></textarea>
+    </div>
+    <div>
+      <label for="genre">Genre (séparé par des virgules) :</label>
+      <input type="text" id="genre" name="genre" value="<%= book.genre.join(', ') %>" required>
+    </div>
+    <div>
+      <label for="ISBN">ISBN :</label>
+      <input type="text" id="ISBN" name="ISBN" value="<%= book.ISBN %>">
+    </div>
+    <button class="updateForm"  type="submit">Modifier le Livre</button>
+  </form>
+  <a href="/livres">Retour à la liste</a>
+</body>
+</html>
+

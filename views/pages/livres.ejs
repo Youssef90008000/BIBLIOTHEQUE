@@ -31,6 +31,7 @@
                     <th>image</th>
                     <th>Actions</th>
                     <th>Actions</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -42,8 +43,9 @@
                             <td><%= book.ISBN %></td>
                             <td><%= book.pages %> Pages</td>
                             <td><img src=<%= book.cover %> alt="image"></td>
-                            <td><a href="/edit-book/<%= book._id %>" class="edit-btn">✏️ Modifier</a></td>
-                            <td><a href="/delete-book/<%= book._id %>" class="delete-btn" onclick="return confirm('Voulez-vous vraiment supprimer ce livre ?')">🗑️ Supprimer</a></td> 
+                            <td><a href="/details-livre/<%= book._id %>">Détails</a></td>
+                            <td><a href="/update/<%= book._id %>" class="edit-btn">✏️ Modifier</a></td>
+                            <td><a href="/livres/<%= book._id %>" class="delete-btn" onclick="return confirm('Voulez-vous vraiment supprimer ce livre ?')">🗑️ Supprimer</a></td> 
                             
                         </tr>
                     <% }); %>
