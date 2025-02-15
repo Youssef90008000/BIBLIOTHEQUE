@@ -2,39 +2,43 @@ const express = require("express");
 const router = express.Router();
 const userControllers = require("../controllers/user_controllers.js");
 const Book = require("../models/user_models.js");
+const auth = require("./../middlewares/auth")
 //routes
 // Route pour la homepage
 router.get('/', (req, res) => {
     res.render('pages/index');
   });
+// Route vers l'inscription
+router.get("/register", userControllers.showLoginRegister);  // Affiche le formulaire
 
+router.post("/register" , userControllers.register);  // Traite l' inscription
 
 // Route pour le login
 router.get('/login', userControllers.showLoginForm); // Affiche le formulaire
 
-router.post('/login', userControllers.login); // Traite la connexion
+router.post('/login', userControllers.login , auth); // Traite la connexion
 
 // route pour le profil
-router.get('/profil', (req, res) => {
+router.get('/profil',(req, res) => {
   res.render('pages/profil');
 });
 
-//logout user
-router.get("/logout", userControllers.logoutUser);
+// //logout user
+// router.get("/logout", userControllers.logoutUser);
 
-// get all books
-router.get("/all-user", userControllers.allUser);
-// get a book by id
-router.get("/show-user/:id", userControllers.showUser);
+// // get all books
+// router.get("/all-user", userControllers.allUser);
+// // get a book by id
+// router.get("/show-user/:id", userControllers.showUser);
 
-// POST route to add a book
-router.post("/register", userControllers.register);
+// // POST route to add a book
+// router.post("/register", userControllers.register);
 
-//delete book by id
-router.delete("/delete-user/:id", userControllers.deleteUser);
+// //delete book by id
+// router.delete("/delete-user/:id", userControllers.deleteUser);
 
-//update book by id
-router.put("/update-user/:id", userControllers.updateUser);
+// //update book by id
+// router.put("/update-user/:id", userControllers.updateUser);
 
 
 
@@ -91,15 +95,7 @@ router.put("/update-user/:id", userControllers.updateUser);
 //   }
 // });
 
-// // Route pour supprimer un livre
-// app.delete('/books/:id', async (req, res) => {
-//   try {
-//     await Book.findByIdAndDelete(req.params.id);
-//     res.sendStatus(204);
-//   } catch (err) {
-//     res.status(500).send('Erreur lors de la suppression du livre');
-//   }
-// });
+
 
 //export router
 

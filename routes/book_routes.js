@@ -4,16 +4,16 @@ const bookcontrollers = require("../controllers/book_controllers.js");
 
 //routes
 // routes for books
-router.get("/livres", bookcontrollers.allBooks);
+router.get("/books", bookcontrollers.allBooks);
 // get a book by id
-router.get("/details-livre/:id", bookcontrollers.showBook);
+router.get("/book-detail/:id", bookcontrollers.showBook);
 
 
 // POST route to add a book
 router.post("/new-book", bookcontrollers.newBook);
 
 //delete book by id
-router.delete("/livres/:id", bookcontrollers.deleteBook);
+router.delete("/books/:id", bookcontrollers.deleteBook);
 
 
 //update book by id

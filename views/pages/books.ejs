@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Livres - Bibliothèque</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Livres Disponibles</h1>
+        </header>
+
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Rechercher un livre...">
+            <button class="submit-btn">Rechercher</button>
+        </div>
+
+        <div class="add-book">
+            <a href="/add-book" class="submit-btn">Ajouter un livre</a>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Titre</th>
+                    <th>Auteur</th>
+                    <th>ISBN</th>
+                    <th>Disponibilité</th>
+                    <th>Image</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (books.length > 0) { %>
+                    <% books.forEach(book => { %>
+                        <tr>
+                            <td><%= book.title %></td>
+                            <td><%= book.author %></td>
+                            <td><%= book.ISBN %></td>
+                            <td><%= book.pages %> Pages</td>
+                            <td><img src="<%= book.cover %>" alt="image" width="50"></td>
+                            <td>
+                                <a href="/book-detail/<%= book._id %>">Détails</a> |
+                                <a href="/update/<%= book._id %>" class="edit-btn">✏️ Modifier</a> |
+                                <form action="/books/<%= book._id %>?_method=DELETE" method="POST" style="display:inline;">
+                                    <button type="submit" class="delete-btn" onclick="return confirm('Voulez-vous vraiment supprimer ce livre ?')">🗑️ Supprimer</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <% }); %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="6">Aucun livre disponible pour le moment.</td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        document.getElementById("searchInput").addEventListener("input", function() {
+            let filter = this.value.toLowerCase();
+            let rows = document.querySelectorAll("tbody tr");
+
+            rows.forEach(row => {
+                let title = row.cells[0].innerText.toLowerCase();
+                row.style.display = title.includes(filter) ? "" : "none";
+            });
+        });
+    </script>
+</body>
+</html>

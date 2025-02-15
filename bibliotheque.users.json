@@ -1,0 +1,39 @@
+[{
+  "_id": {
+    "$oid": "67937c515378639eadf3a1d9"
+  },
+  "email": "stephane@example.com",
+  "password": "$2b$10$g3onF7unZHSEhltQOsiD1eSpkBuxgO7dZ3EORIAkiwvNwSOf0ExUC",
+  "first": "John",
+  "last": "franky",
+  "avatar": "https://example.com/avatar.jpg",
+  "age": 30,
+  "genre_preferences": [
+    "Fiction",
+    "Science Fiction",
+    "Fantasy"
+  ],
+  "favorite_books": [
+    "1984",
+    "Brave New World",
+    "The Hobbit"
+  ],
+  "reading_history": [
+    "1984",
+    "Dune"
+  ],
+  "wishlist": [
+    "Neuromancer",
+    "The Catcher in the Rye"
+  ],
+  "bio": "Avid reader and book lover, always on the lookout for my next great read.",
+  "isPremiumMember": true,
+  "address": {
+    "street": "123 Main St",
+    "city": "Booktown",
+    "zip": "12345",
+    "country": "Novel-land"
+  },
+  "role": "user",
+  "__v": 0
+}]

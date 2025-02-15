@@ -5,7 +5,7 @@ const Book = require("../models/Book_models.js");
 exports.allBooks = async (req, res) => {    
   try {
     const books = await Book.find(); // Récupère tous les livres depuis MongoDB
-    res.status(200).render("pages/livres" , {books}); // Renvoie les livres au format JSON
+    res.status(200).render("pages/books" , {books}); // Renvoie les livres au format JSON
   } catch (error) {
     res.status(404).json({ message: error.message });
   };
@@ -16,7 +16,7 @@ exports.showBook = async (req, res) => {
     const bookId = req.params.id;
     try {
       const book = await Book.findById(bookId);
-      res.render("pages/details-livre", {book});
+      res.render("pages/book-detail", {book});
     } catch (err) {
       res.status(404).json({ message: err.message });
     }
@@ -33,14 +33,15 @@ exports.showBook = async (req, res) => {
     }
   }// Delete a book by id
   exports.deleteBook = async (req, res) => {
-    const bookId = req.params.id;
     try {
-      const deletedBook = await Book.findByIdAndDelete(bookId);
-      res.status(200).json(deletedBook);
-    } catch (err) {
-      res.status(404).json({ message: err.message });
+        const { id } = req.params;
+        await Book.findByIdAndDelete(id); // Suppression dans la base de données
+        res.redirect('/books'); // Redirection après suppression
+    } catch (error) {
+        res.status(500).send("Erreur lors de la suppression.");
     }
-  }
+};
+
  // Get a book by id
  exports.updateBookId = async (req, res) => {
     const bookId = req.params.id;
@@ -60,7 +61,7 @@ exports.showBook = async (req, res) => {
       const updatedBook = await Book.findByIdAndUpdate(bookId, req.body, {
      new: true,
       });
-      res.redirect("/livres");
+      res.redirect("/books");
     } catch (err) {
       res.status(404).json({ message: err.message });
     }

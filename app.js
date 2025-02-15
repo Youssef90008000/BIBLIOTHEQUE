@@ -20,18 +20,19 @@ const upload = multer();
 const port = process.env.PORT || 3005;
 
 // 🛠 Middleware
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(upload.none());
 
-// Gestion des cookies et sessions
-app.use(cookieParser());
+// Gestion des sessions
+
 app.use(
   session({
     secret: process.env.SESSION_SECRET || "secret",
-    resave: false,
+    resave: true,
     saveUninitialized: false,
-    cookie: { maxAge: 7 * 24 * 60 * 60 * 1000 }, // 7 jours
+    cookie: { maxAge: 1 * 24 * 60 * 60 * 1000 }, // 1 jours
   })
 );
 
@@ -53,21 +54,9 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // Configuration du moteur de rendu EJS
 app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "views"));
 
 // Connexion à la base de données
 connectDb();
-
-// Middleware de gestion des erreurs 404
-app.use((req, res, next) => {
-  res.status(404).render("404", { message: "Page non trouvée" });
-});
-
-// Middleware de gestion des erreurs globales
-app.use((err, req, res, next) => {
-  console.error("Erreur serveur :", err);
-  res.status(500).render("500", { message: "Erreur interne du serveur" });
-});
 
 // Démarrer le serveur
 app.listen(port, () => {

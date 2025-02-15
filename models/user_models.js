@@ -1,7 +1,7 @@
-const e = require("express");
+const express = require("express");
 const mongoose = require("mongoose");
 
-// Modèle de livre
+// Modèle de user
 const userSchema = mongoose.Schema({
         email: { type: String },
         password: { type: String },

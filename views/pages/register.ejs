@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="signup-container">
+        <form class="signup-form" action="/register" method="post">
+            <h2>Créer un compte</h2>
+            <div class="input-group">
+                <label for="last">Nom</label>
+                <input type="text" id="last" name="last" placeholder="Entrer votre nom" required>
+            </div>
+            <div class="input-group">
+                <label for="first">Prénom</label>
+                <input type="text" id="first" name="first" placeholder="Entrer votre prénom" required>
+            </div>
+            <div class="input-group">
+                <label for="email">Adresse Email</label>
+                <input type="email" id="email" name="email" placeholder="Entrer votre email" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Mot de passe</label>
+                <input type="password" id="password" name="password" placeholder="Entrer votre mot de passe" required>
+            </div>
+            <div class="input-group">
+                <label for="avatar">Avatar (URL)</label>
+                <input type="text" id="avatar" name="avatar" placeholder="Lien de votre avatar">
+            </div>
+            <div class="input-group">
+                <label for="age">Âge</label>
+                <input type="number" id="age" name="age" placeholder="Entrer votre âge">
+            </div>
+            <div class="input-group">
+                <label for="genre_preferences">Genres préférés</label>
+                <input type="text" id="genre_preferences" name="genre_preferences" placeholder="Ex: Science-fiction, Fantasy">
+            </div>
+            <div class="input-group">
+                <label for="favorite_books">Livres favoris</label>
+                <input type="text" id="favorite_books" name="favorite_books" placeholder="Ex: Harry Potter, Le Seigneur des Anneaux">
+            </div>
+            <div class="input-group">
+                <label for="bio">Biographie</label>
+                <textarea id="bio" name="bio" placeholder="Parlez un peu de vous..."></textarea>
+            </div>
+            <div class="input-group">
+                <label for="isPremiumMember">Abonnement premium</label>
+                <input type="checkbox" id="isPremiumMember" name="isPremiumMember">
+            </div>
+            <div class="input-group">
+                <label for="address">Adresse</label>
+                <input type="text" id="address" name="address" placeholder="Entrer votre adresse">
+            </div>
+            <div class="input-group">
+                <label for="role">Rôle</label>
+                <select id="role" name="role">
+                    <option value="user">Utilisateur</option>
+                    <option value="admin">Administrateur</option>
+                </select>
+            </div>
+            <button type="submit" class="signup-btn">S'inscrire</button>
+            <div class="login-link">
+                <p>Déjà un compte ? <a href="/login">Connexion</a></p>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
