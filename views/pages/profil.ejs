@@ -1,27 +1,34 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mon Profil - Bibliothèque</title>
-    <link rel="stylesheet" href="/css/style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
     <div class="container">
-        <header>
-            <h1>Mon Profil</h1>
-        </header>
-        <section>
-            <div class="profile-details">
-                <h2>Informations personnelles</h2>
-                <p><strong>Nom :</strong> <%= user.first %> <%= user.last %></p>
-                <p><strong>Email :</strong> <%= user.email %></p>
-                <p><strong>Âge :</strong> <%= user.age || "Non spécifié" %></p>
-                <p><strong>Biographie :</strong> <%= user.bio || "Aucune biographie" %></p>
-                <p><strong>Statut Premium :</strong> <%= user.isPremiumMember ? "Oui" : "Non" %></p>
-                <button class="submit-btn">Modifier le profil</button>
-            </div>
-        </section>
+      <header>
+        <h1>Mon Profil</h1>
+      </header>
+      <section>
+        <div class="profile-details">
+          <h2>Informations personnelles</h2>
+          <p><strong>Nom :</strong> <%= user.first %> <%= user.last %></p>
+          <p><strong>Email :</strong> <%= user.email %></p>
+          <p><strong>Âge :</strong> <%= user.age || "Non spécifié" %></p>
+          <p>
+            <strong>Biographie :</strong> <%= user.bio || "Aucune biographie" %>
+          </p>
+          <p>
+            <strong>Statut Premium :</strong> <%= user.isPremiumMember ? "Oui" :
+            "Non" %>
+          </p>
+          <a href="/profil-update/<%= user._id%>" class="submit-btn">Modifier le profil</a>
+          <a href="/borrows" class="submit-btn">Consulter les emprunts</a>
+          <a href="/books" class="submit-btn">Liste de livres</a>
+        </div>
+      </section>
     </div>
-</body>
+  </body>
 </html>

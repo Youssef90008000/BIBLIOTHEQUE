@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modifier l'utilisateur</title>
+    <link rel="stylesheet" href="/css/profil-update.css">
+</head>
+<header>
+    <h1>Modifier les informations de l'utilisateur</h1>
+</header>
+<body>
+    <form action="/profil-update/<%= user._id %>" method="post">
+        <label>Email :</label>
+        <input type="email" name="email" value="<%= user.email %>" required>
+        
+        <label>Mot de passe :</label>
+        <input type="password" name="password" placeholder="Nouveau mot de passe">
+        
+        <label>Prénom :</label>
+        <input type="text" name="first" value="<%= user.first %>">
+        
+        <label>Nom :</label>
+        <input type="text" name="last" value="<%= user.last %>">
+        
+        <label>Avatar :</label>
+        <input type="text" name="avatar" value ="<%= user.avatar %>">
+        
+        <label>Âge :</label>
+        <input type="number" name="age" value="<%= user.age %>">
+        
+        <label>Préférences de genre :</label>
+        <input type="text" name="genre_preferences" value="<%= user.genre_preferences.join(', ') %>">
+        
+        <label>Livres favoris :</label>
+        <input type="text" name="favorite_books" value="<%= user.favorite_books.join(', ') %>">
+        
+        <label>Historique de lecture :</label>
+        <input type="text" name="reading_history" value="<%= user.reading_history.join(', ') %>">
+        
+        <label>Liste de souhaits :</label>
+        <input type="text" name="wishlist" value="<%= user.wishlist.join(', ') %>">
+        
+        <label>Bio :</label>
+        <textarea name="bio"><%= user.bio %></textarea>
+        
+        <label>Membre Premium :</label>
+        <input type="checkbox" name="isPremiumMember" <%= user.isPremiumMember ? 'checked' : '' %>>
+        
+        <label>Adresse :</label>
+        <input type="text" name="address" value="<%= JSON.stringify(user.address) %>">
+        
+        <label>Rôle :</label>
+        <select name="role">
+            <option value="user" <%= user.role === 'user' ? 'selected' : '' %>>Utilisateur</option>
+            <option value="admin" <%= user.role === 'admin' ? 'selected' : '' %>>Agent</option>
+        </select>
+        
+        <button type="submit">Mettre à jour</button>
+    </form>
+</body>
+</html>

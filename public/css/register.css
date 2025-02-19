@@ -1,10 +1,31 @@
-/* Inscription */
+/* Styles généraux */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+/* Hero Section */
+.hero {
+    background-color: #007BFF;
+    color: #fff;
+    padding: 30px 20px;
+    text-align: center;
+}
+
+.hero-content h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+/* Formulaire d'inscription */
 .signup-container {
-    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #f4f4f4;
+    padding: 20px;
 }
 
 .signup-form {
@@ -12,14 +33,9 @@
     padding: 30px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
     width: 100%;
-    max-width: 400px;
-    text-align: center;
-}
-
-.signup-form h2 {
-    margin-bottom: 20px;
-    color: #333;
+    text-align: left;
 }
 
 .input-group {
@@ -29,11 +45,13 @@
 .input-group label {
     display: block;
     margin-bottom: 5px;
-    color: #666;
+    color: #333;
+    font-weight: bold;
 }
 
 .input-group input,
-.input-group select {
+.input-group select,
+.input-group textarea {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
@@ -41,7 +59,12 @@
     font-size: 16px;
 }
 
-.signup-btn {
+textarea {
+    height: 80px;
+    resize: vertical;
+}
+
+button.submit-btn {
     width: 100%;
     padding: 10px;
     background-color: #007BFF;
@@ -52,12 +75,13 @@
     font-size: 16px;
 }
 
-.signup-btn:hover {
+button.submit-btn:hover {
     background-color: #0056b3;
 }
 
 .login-link {
     margin-top: 20px;
+    text-align: center;
 }
 
 .login-link a {

@@ -31,7 +31,9 @@ exports.showBook = async (req, res) => {
     } catch (err) {
       res.status(500).json({ message: err.message });
     }
-  }// Delete a book by id
+  }
+  
+  // Delete a book by id
   exports.deleteBook = async (req, res) => {
     try {
         const { id } = req.params;

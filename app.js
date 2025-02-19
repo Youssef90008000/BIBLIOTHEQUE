@@ -30,9 +30,9 @@ app.use(upload.none());
 app.use(
   session({
     secret: process.env.SESSION_SECRET || "secret",
-    resave: true,
+    resave: false,
     saveUninitialized: false,
-    cookie: { maxAge: 1 * 24 * 60 * 60 * 1000 }, // 1 jours
+    cookie: { maxAge: 7 * 24 * 60 * 60 * 1000 }, // 7 jours
   })
 );
 

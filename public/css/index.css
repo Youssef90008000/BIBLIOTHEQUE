@@ -19,16 +19,22 @@ header .logo h1 {
     color: #fff;
     display: inline-block;
 }
-
+header .logo p{
+    color: #fff;
+    display: inline-block;
+}
 nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 20px;
 }
 
 .nav-links {
     list-style: none;
     display: flex;
+    justify-content: center;
+    padding: 20px;
 }
 
 .nav-links li {
@@ -36,7 +42,6 @@ nav {
 }
 
 .nav-links a {
-    color: #fff;
     text-decoration: none;
     font-size: 16px;
     padding: 8px 16px;
@@ -47,32 +52,14 @@ nav {
     background-color: #0056b3;
 }
 
-.login-btn {
-    background-color: #fff;
-    color: #007BFF;
-    font-weight: bold;
-}
-
-.login-btn:hover {
-    background-color: #e9e9e9;
-}
-
 /* Section Hero */
 .hero {
-    background-color: #0056b3;
-    color: #fff;
-    padding: 100px 0;
-    text-align: center;
-}
-
-.hero-content h2 {
-    font-size: 36px;
-    margin-bottom: 20px;
-}
-
-.hero-content p {
-    font-size: 20px;
-    margin-bottom: 30px;
+    background-image: url("../images/DALL·E.png");
+    background-size: cover; /* Ajuste l'image pour couvrir toute la zone */
+    background-repeat: no-repeat; /* Empêche la répétition */
+    background-position: initial; /* Centre l'image */
+    width: 100vw; /* Largeur égale à la largeur de la fenêtre */
+    height: 100vh; /* Hauteur égale à la hauteur de la fenêtre */
 }
 
 .cta-btn {
@@ -88,55 +75,6 @@ nav {
     background-color: #e9e9e9;
 }
 
-/* Section Features */
-.features {
-    padding: 50px 20px;
-    text-align: center;
-}
-
-.features h3 {
-    font-size: 28px;
-    margin-bottom: 30px;
-}
-
-.feature-cards {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-}
-
-.card {
-    background-color: #fff;
-    padding: 20px;
-    margin: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    width: 30%;
-}
-
-.card h4 {
-    font-size: 22px;
-    margin-bottom: 10px;
-}
-
-.card p {
-    font-size: 16px;
-    color: #666;
-}
-
-.feature-btn {
-    margin-top: 10px;
-    display: inline-block;
-    background-color: #007BFF;
-    color: #fff;
-    padding: 10px 15px;
-    text-decoration: none;
-    border-radius: 4px;
-}
-
-.feature-btn:hover {
-    background-color: #0056b3;
-}
 
 /* Footer */
 footer {
@@ -144,5 +82,4 @@ footer {
     color: #fff;
     text-align: center;
     padding: 20px;
-    margin-top: 50px;
 }

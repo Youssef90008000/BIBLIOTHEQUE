@@ -8,9 +8,15 @@ router.get("/books", bookcontrollers.allBooks);
 // get a book by id
 router.get("/book-detail/:id", bookcontrollers.showBook);
 
+//routes foa add book
 
+// GET route to add a book
+router.get('/add-book', (req, res) => {
+    res.render('pages/add-book');
+  });
+router.get("/add-book");
 // POST route to add a book
-router.post("/new-book", bookcontrollers.newBook);
+router.post("/add-book", bookcontrollers.newBook);
 
 //delete book by id
 router.delete("/books/:id", bookcontrollers.deleteBook);

@@ -3,65 +3,73 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Livres - Bibliothèque</title>
+    <title>Utilisateurs - Bibliothèque</title>
     <link rel="stylesheet" href="/css/style.css" />
   </head>
   <body>
     <div class="container">
       <header>
-        <h1>Livres Disponibles</h1>
+        <h1>Liste des Utilisateurs</h1>
       </header>
 
       <div class="search-bar">
         <input
           type="text"
           id="searchInput"
-          placeholder="Rechercher un livre..."
+          placeholder="Rechercher un utilisateur..."
         />
         <button class="submit-btn">Rechercher</button>
       </div>
+
       <% if (user && user.role === 'admin') { %>
-      <div class="add-book">
-        <a href="/add-book" class="submit-btn">Ajouter un livre</a>
+      <div class="add-user">
+        <a href="/register" class="submit-btn">Ajouter un utilisateur</a>
       </div>
       <% } %>
 
       <table>
         <thead>
           <tr>
-            <th>Titre</th>
-            <th>Auteur</th>
-            <th>ISBN</th>
-            <th>Disponibilité</th>
-            <th>Image</th>
+            <th>Avatar</th>
+            <th>Nom</th>
+            <th>Email</th>
+            <th>Âge</th>
+            <th>Rôle</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          <% if (books.length > 0) { %> <% books.forEach(book => { %>
+          <% if (users.length > 0) { %> 
+          <% users.forEach(userItem => { %>
           <tr>
-            <td><%= book.title %></td>
-            <td><%= book.author %></td>
-            <td><%= book.ISBN %></td>
-            <td><%= book.pages %> Pages</td>
-            <td><img src="<%= book.cover %>" alt="image" width="50" /></td>
             <td>
-              <a href="/book-detail/<%= book._id %>">Détails</a>
+              <img
+                src="<%= userItem.avatar || '/images/default-avatar.png' %>"
+                alt="avatar"
+                width="50"
+              />
+            </td>
+            <td><%= userItem.first %> <%= userItem.last %></td>
+            <td><%= userItem.email %></td>
+            <td><%= userItem.age || 'N/A' %> ans</td>
+            <td><%= userItem.role %></td>
+            <td>
+              <a href="/user-details/<%= userItem._id %>">Détails</a>
 
               <% if (user && user.role === 'admin') { %> |
-              <a href="/update-book/<%= book._id %>" class="edit-btn"
+              <a href="/profil-update/<%= userItem._id %>" class="edit-btn"
                 >✏️ Modifier</a
               >
               |
               <form
-                action="/books/<%= book._id %>?_method=DELETE"
+                action="/users/<%= userItem._id %>?_method=DELETE"
                 method="POST"
                 style="display: inline"
               >
                 <button
                   type="submit"
                   class="delete-btn"
-                  onclick="return confirm('Voulez-vous vraiment supprimer ce livre ?')"
+                  onclick="return confirm('Voulez-vous vraiment supprimer cet utilisateur ?')"
                 >
                   🗑️ Supprimer
                 </button>
@@ -69,9 +77,10 @@
               <% } %>
             </td>
           </tr>
-          <% }); %> <% } else { %>
+          <% }); %> 
+          <% } else { %>
           <tr>
-            <td colspan="6">Aucun livre disponible pour le moment.</td>
+            <td colspan="6">Aucun utilisateur trouvé.</td>
           </tr>
           <% } %>
         </tbody>
@@ -86,8 +95,9 @@
           let rows = document.querySelectorAll("tbody tr");
 
           rows.forEach((row) => {
-            let title = row.cells[0].innerText.toLowerCase();
-            row.style.display = title.includes(filter) ? "" : "none";
+            let name = row.cells[1].innerText.toLowerCase();
+            let email = row.cells[2].innerText.toLowerCase();
+            row.style.display = name.includes(filter) || email.includes(filter) ? "" : "none";
           });
         });
     </script>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ajouter un Livre</title>
+    <link rel="stylesheet" href="/css/add-book.css" />
+  </head>
+  <header>
+    <h1>Ajouter un livre</h1>
+    <nav>
+      <ul>
+        <li><a href="/">Accueil</a></li>
+        <li><a href="/books">Retour à la liste</a></li>
+      </ul>
+    </nav>
+  </header>
+  <body>
+    <form action="/add-book" method="POST">
+      <div>
+        <label for="cover">URL de la couverture :</label>
+        <input
+          type="url"
+          id="cover"
+          name="cover"
+          required
+          placeholder="Entrez l'URL de la couverture"
+        />
+      </div>
+      <div>
+        <label for="title">Titre :</label>
+        <input
+          type="text"
+          id="title"
+          name="title"
+          required
+          placeholder="Entrez le titre du livre"
+        />
+      </div>
+      <div>
+        <label for="author">Auteur :</label>
+        <input
+          type="text"
+          id="author"
+          name="author"
+          required
+          placeholder="Entrez le nom de l'auteur"
+        />
+      </div>
+      <div>
+        <label for="description">Description :</label>
+        <textarea
+          id="description"
+          name="description"
+          required
+          placeholder="Entrez la description du livre"
+        ></textarea>
+      </div>
+      <div>
+        <label for="genre">Genre :</label>
+        <input
+          type="text"
+          id="genre"
+          name="genre"
+          required
+          placeholder="Entrez le genre du livre"
+        />
+      </div>
+      <div>
+        <label for="ISBN">ISBN :</label>
+        <input
+          type="text"
+          id="ISBN"
+          name="ISBN"
+          placeholder="Entrez l'ISBN du livre (optionnel)"
+        />
+      </div>
+      <button type="submit">Ajouter le Livre</button>
+    </form>
+
+    <a href="/books" class="submit-btn">Retour à la liste des livres</a>
+  </body>
+</html>
