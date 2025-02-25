@@ -25,7 +25,7 @@ router.get('/login', userControllers.showLoginForm); // Affiche le formulaire
 router.post('/login', userControllers.login); // Traite la connexion
 
 //route pour le profil
-router.get('/profil/:id',auth ,userControllers.profil);
+router.get('/dashboard-studiant/:id',auth ,userControllers.profil);
 
 // Route GET pour afficher le formulaire de mise à jour
 router.get("/profil-update/:id",userControllers.userDetailUpdate);

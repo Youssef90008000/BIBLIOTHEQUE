@@ -45,7 +45,7 @@ exports.profil = async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: "Utilisateur non trouvé" });
     }
-    res.render("pages/profil", { user });
+    res.render("pages/dashboard-studiant", { user });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -119,7 +119,8 @@ exports.updateUser = async (req, res) => {
     }
 
     // Redirection vers la page profil après la mise à jour
-    res.redirect(`/profil/${user._id}`);
+    const users = await User.find(); // Récupère tous les utilisateurs depuis MongoDB
+    res.status(200).render("pages/profils-users" , {users}); // affiche les utilisateurs
 
   } catch (err) {
     console.error(err);
@@ -207,7 +208,7 @@ exports.login = async (req, res) => {
     if (user.role === "admin") {
       return res.render("pages/admin-index");
     } else {
-      return res.render("profil/" + req.session.user.id);
+      return res.render("pages/dashboard-studiant",{user});
     }
   } catch (err) {
     console.error("Erreur lors de la connexion :", err);

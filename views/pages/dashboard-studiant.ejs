@@ -1,44 +1,62 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tableau de Bord - Étudiant</title>
-    <link rel="stylesheet" href="/css/style.css">
-</head>
-<body>
-    <div class="dashboard-container">
-        <header>
-            <h1>Bienvenue, Étudiant !</h1>
-        </header>
-        <section class="current-borrows">
-            <h2>Emprunts en cours</h2>
-            <table class="borrow-table">
-                <thead>
-                    <tr>
-                        <th>Livre</th>
-                        <th>Date d'emprunt</th>
-                        <th>Date de retour</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>L'Étranger</td>
-                        <td>01/10/2024</td>
-                        <td>01/11/2024</td>
-                    </tr>
-                    <!-- Autres emprunts -->
-                </tbody>
-            </table>
-        </section>
-        <section class="favorite-books">
-            <h2>Livres favoris</h2>
-            <ul class="favorite-list">
-                <li>Les Misérables</li>
-                <li>Le Petit Prince</li>
-                <li>1984</li>
-            </ul>
-        </section>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Détails de l'Utilisateur</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Bienvenue <%= user.first %> <%= user.last %></h1>
+      </header>
+
+      <div class="user-details">
+        <img
+          src="<%= user.avatar || '/images/default-avatar.png' %>"
+          alt="Avatar"
+          class="user-avatar"
+        />
+        <h2><%= user.first %> <%= user.last %></h2>
+        <p><strong>Email :</strong> <%= user.email %></p>
+        <p><strong>Âge :</strong> <%= user.age || 'N/A' %> ans</p>
+        <p><strong>Rôle :</strong> <%= user.role %></p>
+        <p><strong>Bio :</strong> <%= user.bio || 'Pas de bio disponible' %></p>
+        <p><strong>Membre Premium :</strong> <%= user.isPremiumMember ? "Oui" : "Non" %></p>
+
+        <% if (user.address) { %>
+        <h3>Adresse</h3>
+        <p><%= user.address.street || '' %></p>
+        <p><%= user.address.city || '' %>, <%= user.address.zip || '' %></p>
+        <% } %>
+
+        <h3>Préférences de lecture</h3>
+        <ul>
+          <% if (user.genre_preferences.length > 0) { %>
+          <% user.genre_preferences.forEach(genre => { %>
+          <li><%= genre %></li>
+          <% }); %>
+          <% } else { %>
+          <li>Aucune préférence renseignée</li>
+          <% } %>
+        </ul>
+
+        <h3>Livres favoris</h3>
+        <ul>
+          <% if (user.favorite_books.length > 0) { %>
+          <% user.favorite_books.forEach(book => { %>
+          <li><%= book %></li>
+          <% }); %>
+          <% } else { %>
+          <li>Aucun livre favori</li>
+          <% } %>
+        </ul>
+
+        </div>
+
+        <a href="/users" class="back-btn">⬅ Retour à la liste</a>
+      </div>
     </div>
-</body>
+  </body>
 </html>

@@ -11,7 +11,7 @@ body {
 }
 
 header {
-    background-color: #007BFF;
+    background-color: #4e5256;
     padding: 20px;
 }
 
@@ -54,12 +54,20 @@ nav {
 
 /* Section Hero */
 .hero {
-    background-image: url("../images/DALL·E.png");
-    background-size: cover; /* Ajuste l'image pour couvrir toute la zone */
-    background-repeat: no-repeat; /* Empêche la répétition */
-    background-position: initial; /* Centre l'image */
-    width: 100vw; /* Largeur égale à la largeur de la fenêtre */
-    height: 100vh; /* Hauteur égale à la hauteur de la fenêtre */
+    position: relative;
+    width: 100vw;
+    height: 77vh;
+    overflow: hidden;
+}
+
+.hero video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ajuste la vidéo pour couvrir toute la section */
+    transform: translate(-50%, -50%);
 }
 
 .cta-btn {

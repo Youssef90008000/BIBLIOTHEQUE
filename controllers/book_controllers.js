@@ -49,7 +49,7 @@ exports.showBook = async (req, res) => {
     const bookId = req.params.id;
     try {
       const book = await Book.findById(bookId);
-      res.render("pages/update", {book});
+      res.render("pages/update-book", {book});
     } catch (err) {
       res.status(404).json({ message: err.message });
     }

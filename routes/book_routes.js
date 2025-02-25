@@ -23,10 +23,10 @@ router.delete("/books/:id", bookcontrollers.deleteBook);
 
 
 //update book by id
-router.get("/update/:id", bookcontrollers.updateBookId);
+router.get("/update-book/:id", bookcontrollers.updateBookId);
 
 //update book by id
-router.post("/update/:id", bookcontrollers.updateBook);
+router.post("/update-book/:id", bookcontrollers.updateBook);
 
 //export router
 module.exports = router;
