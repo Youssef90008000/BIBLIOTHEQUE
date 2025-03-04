@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Utilisateurs - Bibliothèque</title>
-    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/profils-users.css" />
   </head>
   <body>
     <div class="container">
@@ -56,11 +56,10 @@
             <td>
               <a href="/user-details/<%= userItem._id %>">Détails</a>
 
-              <% if (user && user.role === 'admin') { %> |
+              <% if (user && user.role === 'admin') { %>
               <a href="/profil-update/<%= userItem._id %>" class="edit-btn"
-                >✏️ Modifier</a
+                >Modifier</a
               >
-              |
               <form
                 action="/users/<%= userItem._id %>?_method=DELETE"
                 method="POST"
@@ -71,7 +70,7 @@
                   class="delete-btn"
                   onclick="return confirm('Voulez-vous vraiment supprimer cet utilisateur ?')"
                 >
-                  🗑️ Supprimer
+                Supprimer
                 </button>
               </form>
               <% } %>

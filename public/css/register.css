@@ -1,94 +1,110 @@
-/* Styles généraux */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+/* Réinitialisation générale */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Corps de page */
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #264653; /* Bleu foncé */
+    line-height: 1.6;
+  }
+  
+  /* Section Hero */
+  .hero {
+    background-color: #2A9D8F; /* VERT */
+    padding: 60px 20px;
     text-align: center;
-}
-
-/* Hero Section */
-.hero {
-    background-color: #007BFF;
     color: #fff;
-    padding: 30px 20px;
-    text-align: center;
-}
-
-.hero-content h2 {
-    font-size: 36px;
-    margin-bottom: 20px;
-}
-
-/* Formulaire d'inscription */
-.signup-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-}
-
-.signup-form {
+  }
+  
+  .hero-content h2 {
+    font-size: 2.5em;
+    color: #E9C46A; /* JAUNE */
+  }
+  
+  /* Conteneur d'inscription */
+  .signup-container {
     background-color: #fff;
-    padding: 30px;
+    width: 90%;
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px 30px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 500px;
+  }
+  
+  /* Formulaire d'inscription */
+  .signup-form {
     width: 100%;
-    text-align: left;
-}
-
-.input-group {
+  }
+  
+  /* Groupes d'inputs */
+  .input-group {
     margin-bottom: 15px;
-}
-
-.input-group label {
+  }
+  
+  .input-group label {
     display: block;
     margin-bottom: 5px;
-    color: #333;
     font-weight: bold;
-}
-
-.input-group input,
-.input-group select,
-.input-group textarea {
+    color: #264653;
+  }
+  
+  .input-group input,
+  .input-group select,
+  .input-group textarea {
     width: 100%;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 2px solid #2A9D8F; /* VERT */
     border-radius: 4px;
-    font-size: 16px;
-}
-
-textarea {
-    height: 80px;
+    font-size: 1em;
+    transition: border-color 0.3s ease;
+  }
+  
+  /* Focus sur les inputs */
+  .input-group input:focus,
+  .input-group select:focus,
+  .input-group textarea:focus {
+    outline: none;
+    border-color: #E76F51; /* ROUGE */
+  }
+  
+  /* Ajustement pour le textarea */
+  .input-group textarea {
     resize: vertical;
-}
-
-button.submit-btn {
-    width: 100%;
-    padding: 10px;
-    background-color: #007BFF;
+    min-height: 80px;
+  }
+  
+  /* Bouton d'inscription */
+  .submit-btn {
+    background-color: #2A9D8F; /* VERT */
     color: #fff;
     border: none;
+    padding: 12px;
+    font-size: 1.1em;
     border-radius: 4px;
     cursor: pointer;
-    font-size: 16px;
-}
-
-button.submit-btn:hover {
-    background-color: #0056b3;
-}
-
-.login-link {
-    margin-top: 20px;
-    text-align: center;
-}
-
-.login-link a {
-    color: #007BFF;
-    text-decoration: none;
-}
-
-.login-link a:hover {
-    text-decoration: underline;
-}
+    transition: background-color 0.3s ease;
+    width: 100%;
+    margin-top: 10px;
+  }
+  
+  .submit-btn:hover {
+    background-color: #E76F51; /* ROUGE */
+  }
+  
+  /* Adaptatif pour mobiles */
+  @media (max-width: 480px) {
+    .hero-content h2 {
+      font-size: 2em;
+    }
+    
+    .signup-container {
+      padding: 15px 20px;
+    }
+  }
+  

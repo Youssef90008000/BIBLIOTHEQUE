@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ajouter un Emprunt - Bibliothèque</title>
+    <link rel="stylesheet" href="/css/borrows.css" />
+</head>
+<body>
+    <header>
+        <h1>Ajouter un Emprunt</h1>
+    </header>
+
+    <main>
+        <h2>Formulaire d'ajout d'un emprunt</h2>
+        <form id="borrowForm" action="/bibliotheque/borrows-create" method="POST">
+            <!-- Sélection de l'utilisateur -->
+            <label for="userSelect">Utilisateur :</label>
+            <select id="userSelect" name="user" required>
+                <option value="">Sélectionnez un utilisateur</option>
+                <% users.forEach(user => { %>
+                    <option value="<%= user._id %>"><%= user.first %> <%= user.last %></option>
+                <% }) %>
+            </select>
+
+            <!-- Sélection du livre -->
+            <label for="bookSelect">Livre :</label>
+            <select id="bookSelect" name="book" required>
+                <option value="">Sélectionnez un livre</option>
+                <% books.forEach(book => { %>
+                    <option value="<%= book._id %>"><%= book.title %></option>
+                <% }) %>
+            </select>
+
+            <!-- Date d'emprunt -->
+            <label for="dateBorrow">Date d'emprunt :</label>
+            <input type="date" id="dateBorrow" name="date_borrow" required>
+
+            <!-- Date de retour -->
+            <label for="dateReturn">Date de retour :</label>
+            <input type="date" id="dateReturn" name="date_return" required>
+
+            <button type="submit">Ajouter</button>
+        </form>
+
+        <!-- Message d'erreur -->
+        <div id="error-message" style="display: none; color: red;"></div>
+    </main>
+</body>
+</html>

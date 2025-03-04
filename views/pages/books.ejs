@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Livres - Bibliothèque</title>
-    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/books.css" />
   </head>
   <body>
     <div class="container">
@@ -25,57 +25,44 @@
         <a href="/add-book" class="submit-btn">Ajouter un livre</a>
       </div>
       <% } %>
+      
+      <div class="book-grid">
+        <% if (books.length > 0) { %> 
+        <% books.forEach(book => { %>
+        <div class="book-card">
+          <img src="<%= book.cover %>" alt="image" class="book-cover"/>
+          <div class = "book-info">
+                      <h3><%= book.title %></h3>
+          <p>Auteur : <%= book.author %></p>
+          <p>ISBN : <%= book.ISBN %></p>
+          <p><%= book.pages %> Pages</p>
+          </div>
 
-      <table>
-        <thead>
-          <tr>
-            <th>Titre</th>
-            <th>Auteur</th>
-            <th>ISBN</th>
-            <th>Disponibilité</th>
-            <th>Image</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% if (books.length > 0) { %> <% books.forEach(book => { %>
-          <tr>
-            <td><%= book.title %></td>
-            <td><%= book.author %></td>
-            <td><%= book.ISBN %></td>
-            <td><%= book.pages %> Pages</td>
-            <td><img src="<%= book.cover %>" alt="image" width="50" /></td>
-            <td>
-              <a href="/book-detail/<%= book._id %>">Détails</a>
-
-              <% if (user && user.role === 'admin') { %> |
-              <a href="/update-book/<%= book._id %>" class="edit-btn"
-                >✏️ Modifier</a
+          <div class="book-actions">
+            <a href="/book-detail/<%= book._id %>" class="detail-btn">Détails</a>
+            <% if (user && user.role === 'admin') { %>
+            <a href="/update-book/<%= book._id %>" class="edit-btn">Modifier</a>
+            <form
+              action="/books/<%= book._id %>?_method=DELETE"
+              method="POST"
+              style="display: inline"
+            >
+              <button
+                type="submit"
+                class="delete-btn"
+                onclick="return confirm('Voulez-vous vraiment supprimer ce livre ?')"
               >
-              |
-              <form
-                action="/books/<%= book._id %>?_method=DELETE"
-                method="POST"
-                style="display: inline"
-              >
-                <button
-                  type="submit"
-                  class="delete-btn"
-                  onclick="return confirm('Voulez-vous vraiment supprimer ce livre ?')"
-                >
-                  🗑️ Supprimer
-                </button>
-              </form>
-              <% } %>
-            </td>
-          </tr>
-          <% }); %> <% } else { %>
-          <tr>
-            <td colspan="6">Aucun livre disponible pour le moment.</td>
-          </tr>
-          <% } %>
-        </tbody>
-      </table>
+                Supprimer
+              </button>
+            </form>
+            <% } %>
+          </div>
+        </div>
+        <% }); %> 
+        <% } else { %>
+        <p>Aucun livre disponible pour le moment.</p>
+        <% } %>
+      </div>
     </div>
 
     <script>
@@ -83,11 +70,11 @@
         .getElementById("searchInput")
         .addEventListener("input", function () {
           let filter = this.value.toLowerCase();
-          let rows = document.querySelectorAll("tbody tr");
+          let books = document.querySelectorAll(".book-card");
 
-          rows.forEach((row) => {
-            let title = row.cells[0].innerText.toLowerCase();
-            row.style.display = title.includes(filter) ? "" : "none";
+          books.forEach((book) => {
+            let title = book.querySelector("h3").innerText.toLowerCase();
+            book.style.display = title.includes(filter) ? "" : "none";
           });
         });
     </script>

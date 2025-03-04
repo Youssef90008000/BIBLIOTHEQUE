@@ -1,35 +1,49 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emprunts - Bibliothèque</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestion des Emprunts - Bibliothèque</title>
+    <link rel="stylesheet" href="/css/borrows.css" />
 </head>
 <body>
-    <div class="form-container">
-        <header>
-            <h1>Mes Emprunts</h1>
-        </header>
+    <header>
+        <h1>Liste des Emprunts</h1>
+    </header>
+
+    <div class="container">
         <table>
             <thead>
                 <tr>
                     <th>Livre</th>
+                    <th>Emprunteur</th>
                     <th>Date d'emprunt</th>
                     <th>Date de retour</th>
-                    <th>Actions</th>
+                    <th>Statut</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>1984</td>
-                    <td>01/10/2024</td>
-                    <td>01/11/2024</td>
-                    <td>
-                        <button class="edit-btn">Prolonger</button>
-                        <button class="delete-btn">Terminer</button>
-                    </td>
-                </tr>
+            <tbody id="borrowTable">
+                <% if (borrows.length === 0) { %>
+                    <tr><td colspan="5">Aucun emprunt trouvé.</td></tr>
+                <% } else { %>
+                    <% borrows.forEach(borrow => { %>
+                        <tr>
+                            <td><%= borrow.book.title %></td>
+                            <td><%= borrow.user.first %> <%= borrow.user.last %></td>
+                            <td><%= new Date(borrow.date_borrow).toLocaleDateString() %></td>
+                            <td><%= new Date(borrow.date_return).toLocaleDateString() %></td>
+                            <td>
+                                <% if (borrow.status === 'En cours') { %>
+                                    <span style="color: orange;">En cours</span>
+                                <% } else if (borrow.status === 'Retourné') { %>
+                                    <span style="color: green;">Retourné</span>
+                                <% } else { %>
+                                    <span style="color: red;">Non valide</span>
+                                <% } %>
+                            </td>
+                        </tr>
+                    <% }) %>
+                <% } %>
             </tbody>
         </table>
     </div>

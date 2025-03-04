@@ -1,6 +1,6 @@
 // Description: This file contains the book controller functions.
 // Import the Book model
-const Book = require("../models/Book_models.js");
+const Book = require("../models/book_models.js");
 // Get all books
 exports.allBooks = async (req, res) => {    
   try {

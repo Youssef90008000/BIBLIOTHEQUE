@@ -1,93 +1,86 @@
-* {
+body {
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-family: 'Arial', sans-serif;
-}
-
-body {
-    background-color: #f4f4f4;
-    color: #333;
-}
-
-header {
-    background-color: #4e5256;
+    background-color: #264653;
+    color: white;
+  }
+  
+  .container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
     padding: 20px;
-}
-
-header .logo h1 {
-    color: #fff;
-    display: inline-block;
-}
-header .logo p{
-    color: #fff;
-    display: inline-block;
-}
-nav {
+  }
+  
+  header {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #E9C46A;
+  }
+  
+  nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
-}
-
-.nav-links {
+    background-color: #2A9D8F;
+    padding: 15px 30px;
+  }
+  
+  .logo h1 {
+    margin: 0;
+    font-size: 24px;
+  }
+  
+  .logo p {
+    margin: 5px 0 0;
+    font-size: 14px;
+    color: #E9C46A;
+  }
+  
+  .nav-links {
     list-style: none;
     display: flex;
-    justify-content: center;
-    padding: 20px;
-}
-
-.nav-links li {
-    margin-left: 20px;
-}
-
-.nav-links a {
+    gap: 15px;
+  }
+  
+  .nav-links li {
+    display: inline;
+  }
+  
+  .nav-links a {
     text-decoration: none;
-    font-size: 16px;
-    padding: 8px 16px;
+    background-color: #264653;
+    color: white;
+    padding: 10px 15px;
     border-radius: 5px;
-}
-
-.nav-links a:hover {
-    background-color: #0056b3;
-}
-
-/* Section Hero */
-.hero {
-    position: relative;
-    width: 100vw;
-    height: 77vh;
+    transition: background 0.3s;
+  }
+  
+  .nav-links a:hover {
+    background-color: #F4A261;
+  }
+  
+  .hero {
+    width: 100%;
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     overflow: hidden;
-}
-
-.hero video {
-    position: absolute;
-    top: 50%;
-    left: 50%;
+  }
+  
+  .hero video {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ajuste la vidéo pour couvrir toute la section */
-    transform: translate(-50%, -50%);
-}
-
-.cta-btn {
-    background-color: #fff;
-    color: #007BFF;
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 5px;
-    font-size: 18px;
-}
-
-.cta-btn:hover {
-    background-color: #e9e9e9;
-}
-
-
-/* Footer */
-footer {
-    background-color: #333;
-    color: #fff;
+    object-fit: cover;
+  }
+  
+  footer {
     text-align: center;
-    padding: 20px;
-}
+    padding: 15px;
+    background-color: #2A9D8F;
+    color: white;
+    margin-top: 20px;
+  }
+  

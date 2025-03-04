@@ -19,10 +19,10 @@ exports.showAdmin = async (req, res) => {
 exports.allUser = async (req, res) => {
   try {
     const users = await User.find(); // Récupère tous les utilisateurs depuis MongoDB
-    res.status(200).render("pages/profils-users" , {users}); // affiche les utilisateurs
+    res.status(200).render("pages/profils-users", { users }); // affiche les utilisateurs
   } catch (error) {
     res.status(404).json({ message: error.message });
-  };
+  }
 };
 
 // Get a user by id
@@ -98,10 +98,16 @@ exports.updateUser = async (req, res) => {
       bio,
       role,
       isPremiumMember: isPremiumMember === "on",
-      genre_preferences: genre_preferences ? genre_preferences.split(",").map(pref => pref.trim()) : [],
-      favorite_books: favorite_books ? favorite_books.split(",").map(book => book.trim()) : [],
-      reading_history: reading_history ? reading_history.split(",").map(book => book.trim()) : [],
-      wishlist: wishlist ? wishlist.split(",").map(book => book.trim()) : [],
+      genre_preferences: genre_preferences
+        ? genre_preferences.split(",").map((pref) => pref.trim())
+        : [],
+      favorite_books: favorite_books
+        ? favorite_books.split(",").map((book) => book.trim())
+        : [],
+      reading_history: reading_history
+        ? reading_history.split(",").map((book) => book.trim())
+        : [],
+      wishlist: wishlist ? wishlist.split(",").map((book) => book.trim()) : [],
       address: address ? JSON.parse(address) : {},
     };
 
@@ -112,7 +118,10 @@ exports.updateUser = async (req, res) => {
     }
 
     // Mise à jour de l'utilisateur
-    const user = await User.findByIdAndUpdate(req.params.id, updateData, { new: true, runValidators: true });
+    const user = await User.findByIdAndUpdate(req.params.id, updateData, {
+      new: true,
+      runValidators: true,
+    });
 
     if (!user) {
       return res.status(404).send("Utilisateur non trouvé.");
@@ -120,14 +129,12 @@ exports.updateUser = async (req, res) => {
 
     // Redirection vers la page profil après la mise à jour
     const users = await User.find(); // Récupère tous les utilisateurs depuis MongoDB
-    res.status(200).render("pages/profils-users" , {users}); // affiche les utilisateurs
-
+    res.status(200).render("pages/profils-users", { users }); // affiche les utilisateurs
   } catch (err) {
     console.error(err);
     res.status(500).send("Erreur lors de la mise à jour de l'utilisateur.");
   }
 };
-
 
 // Afficher la page d'inscription
 exports.showLoginRegister = (req, res) => {
@@ -208,15 +215,22 @@ exports.login = async (req, res) => {
     if (user.role === "admin") {
       return res.render("pages/admin-index");
     } else {
-      return res.render("pages/dashboard-studiant",{user});
+      return res.render("pages/dashboard-studiant", { user });
     }
   } catch (err) {
     console.error("Erreur lors de la connexion :", err);
-    return res
-      .status(500)
-      .json({
-        message: "Une erreur est survenue, veuillez réessayer plus tard.",
-      });
+    return res.status(500).json({
+      message: "Une erreur est survenue, veuillez réessayer plus tard.",
+    });
+  }
+};
+
+exports.forgotPassword = (req, res, next) => {
+  try {
+    res.render('pages/forgot-password');
+  } catch (e) {
+    console.error(e);
+    res.status(403).json({ error: e });
   }
 };
 

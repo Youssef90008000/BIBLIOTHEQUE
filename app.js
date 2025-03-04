@@ -3,6 +3,7 @@ const express = require("express");
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const multer = require("multer");
+const cors = require('cors');
 const methodOverride = require("method-override");
 require("dotenv").config();
 const path = require("path");
@@ -13,6 +14,10 @@ const connectDb = require("./database/connect.js");
 // Importation des routes
 const bookRouter = require("./routes/book_routes.js");
 const userRouter = require("./routes/user_routes.js");
+const borrowRouter = require("./routes/borrow_routes.js");
+const bookRoutes = require('./routes/book_routes');
+const userRoutes = require('./routes/user_routes');
+const borrowRoutes = require('./routes/borrow_routes');
 
 // Création de l'application Express
 const app = express();
@@ -22,6 +27,7 @@ const port = process.env.PORT || 3005;
 // 🛠 Middleware
 
 app.use(express.urlencoded({ extended: true }));
+app.use(cors()); // Permet les requêtes cross-origin
 app.use(express.json());
 app.use(upload.none());
 
@@ -42,12 +48,17 @@ app.use((req, res, next) => {
   next();
 });
 
+
 // Autoriser les requêtes PUT et DELETE via methodOverride
 app.use(methodOverride("_method"));
 
 // Définition des routes
 app.use(bookRouter);
 app.use(userRouter);
+app.use(borrowRouter);
+app.use('/bibliotheque', borrowRoutes);
+app.use('/bibliotheque', bookRoutes);
+app.use('/bibliotheque', userRoutes);
 
 // Servir les fichiers statiques
 app.use(express.static(path.join(__dirname, "public")));

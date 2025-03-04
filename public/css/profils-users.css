@@ -1,0 +1,172 @@
+/* Réinitialisation */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Corps de page */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  color: #264653; /* Bleu foncé pour le texte */
+  padding: 20px;
+}
+
+/* Conteneur principal */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* En-tête */
+header {
+  background-color: #264653; /* BLEU */
+  padding: 20px;
+  text-align: center;
+}
+
+header h1 {
+  color: #E9C46A; /* JAUNE */
+  font-size: 2em;
+}
+
+/* Barre de recherche */
+.search-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.search-bar input[type="text"] {
+  padding: 10px;
+  width: 300px;
+  border: 2px solid #2A9D8F; /* VERT */
+  border-right: none;
+  border-radius: 4px 0 0 4px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.search-bar input[type="text"]:focus {
+  border-color: #E76F51; /* ROUGE */
+}
+
+.search-bar .submit-btn {
+  background-color: #2A9D8F; /* VERT */
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.search-bar .submit-btn:hover {
+  background-color: #E76F51; /* ROUGE */
+}
+
+/* Bouton Ajouter un utilisateur (pour admin) */
+.add-user {
+  text-align: right;
+  margin: 0 20px 20px;
+}
+
+.add-user .submit-btn {
+  background-color: #F4A261; /* ORANGE */
+  color: #fff;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.add-user .submit-btn:hover {
+  background-color: #E76F51; /* ROUGE */
+}
+
+/* Tableau des utilisateurs */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background-color: #2A9D8F; /* VERT */
+  color: #fff;
+}
+
+thead th {
+  padding: 15px;
+  text-align: left;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+tbody tr:hover {
+  background-color: #F4A261; /* ORANGE */
+  color: #264653;
+}
+
+tbody td {
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Avatar */
+tbody img {
+  border-radius: 50%;
+}
+
+/* Liens d'actions */
+a {
+  text-decoration: none;
+  color: #2A9D8F;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Bouton Modifier */
+.edit-btn {
+  color: #E9C46A; /* JAUNE */
+}
+
+/* Bouton Supprimer */
+.delete-btn {
+  background-color: #E76F51; /* ROUGE */
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.delete-btn:hover {
+  background-color: #264653; /* BLEU */
+}
+
+/* Adaptatif pour mobiles */
+@media (max-width: 768px) {
+  .search-bar {
+    flex-direction: column;
+  }
+
+  .search-bar input[type="text"],
+  .search-bar .submit-btn {
+    width: 100%;
+    margin-bottom: 10px;
+    border-radius: 4px;
+  }
+}

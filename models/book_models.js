@@ -1,6 +1,5 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
-// Modèle de livre
 const BookSchema = mongoose.Schema({
   cover: { type: String },
   title: { type: String },
@@ -17,7 +16,5 @@ const BookSchema = mongoose.Schema({
   rating: { type: Number },
 });
 
-//definir un model
-const Book = mongoose.model("Book", BookSchema);
-
-module.exports = Book;
+// Vérifier si le modèle "Book" a déjà été compilé
+module.exports = mongoose.models.Book || mongoose.model("Book", BookSchema);
