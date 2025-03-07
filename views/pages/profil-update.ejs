@@ -27,8 +27,8 @@
         <input type="text" name="avatar" value ="<%= user.avatar %>" id="avatar-input">
         <img id="avatar-preview" src="<%= user.avatar || '/images/default-avatar.png' %>" alt="Avatar Preview" width="100" height="100">
 
-        <label>Âge :</label>
-        <input type="number" name="age" value="<%= user.age %>">
+        <label>Date de naissance :</label>
+        <input type="date" name="birthday_date" value="<%= user.birthday_date %>">
         
         <label>Préférences de genre :</label>
         <input type="text" name="genre_preferences" value="<%= user.genre_preferences.join(', ') %>">

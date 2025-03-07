@@ -6,8 +6,11 @@
   <title>Modifier le Livre</title>
   <link rel="stylesheet" href="/css/update-book.css">
 </head>
-<body>
+<header>
   <h1>Modifier le Livre</h1>
+</header>
+<body>
+
   <form action="/update-book/<%= book._id %>" method="POST">
     <div>
       <label for="cover">URL de la couverture :</label>
@@ -25,9 +28,16 @@
       <label for="description">Description :</label>
       <textarea id="description" name="description" required><%= book.description %></textarea>
     </div>
-    <div>
-      <label for="genre">Genre (séparé par des virgules) :</label>
-      <input type="text" id="genre" name="genre" value="<%= book.genre.join(', ') %>" required>
+    <div class="input-group">
+      <label for="genre">Genre</label>
+      <select id="genre" name="genre" value="<%= book.genre %>" requiredrequired>
+        <option value="science-fiction">science-fiction</option>
+        <option value="horreur">horreur</option>
+        <option value="fantasy">fantasy</option>
+        <option value="fantastique">fantastique</option>
+        <option value="policier">policier</option>
+        <option value="amour">fantasy</option>
+      </select>
     </div>
     <div>
       <label for="ISBN">ISBN :</label>

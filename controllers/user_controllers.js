@@ -1,14 +1,15 @@
 // Description: This file contains the functions that are used to interact with the user model.
 const User = require("../models/user_models");
+const Borrows = require("../models/borrow_models");
 const bcrypt = require("bcrypt");
 
 // Admin
 exports.showAdmin = async (req, res) => {
-  const userId = req.params.id;
+  const userId = req.session.user.id;
   try {
     const user = req.session.user.role;
-    if (user === admin) {
-      res.render("/pages/admin-index");
+    if (user === "admin") {
+      res.render("pages/admin-index");
     }
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -41,15 +42,32 @@ exports.showUser = async (req, res) => {
 exports.profil = async (req, res) => {
   const userId = req.params.id;
   try {
+    // Récupérer l'utilisateur d'abord
     const user = await User.findById(userId);
+    
     if (!user) {
       return res.status(404).json({ message: "Utilisateur non trouvé" });
     }
-    res.render("pages/dashboard-studiant", { user });
+
+    if (user.role === "user") {
+      const borrows = await Borrows.find({ user: userId })
+        .populate("book")
+        .populate("user");
+
+      res.render("pages/dashboard-studiant", {
+        borrows: borrows,
+        user: user, // Utiliser l'utilisateur récupéré plutôt que borrows[0].user
+      });
+    } else {
+      // Gérer les autres rôles ou rediriger
+      res.status(403).json({ message: "Accès non autorisé" });
+    }
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    console.error("Erreur lors de la récupération du profil:", err);
+    res.status(500).json({ message: "Erreur interne du serveur" });
   }
 };
+
 
 // // Delete a user by id
 // exports.deleteUser = async (req, res) => {
@@ -78,7 +96,7 @@ exports.updateUser = async (req, res) => {
       password,
       first,
       last,
-      age,
+      birthday_date,
       genre_preferences,
       favorite_books,
       reading_history,
@@ -94,10 +112,10 @@ exports.updateUser = async (req, res) => {
       email,
       first,
       last,
-      age,
+      birthday_date,
       bio,
       role,
-      isPremiumMember: isPremiumMember === "on",
+      isPremiumMember: isPremiumMember === "on" ? true : false,
       genre_preferences: genre_preferences
         ? genre_preferences.split(",").map((pref) => pref.trim())
         : [],
@@ -108,7 +126,7 @@ exports.updateUser = async (req, res) => {
         ? reading_history.split(",").map((book) => book.trim())
         : [],
       wishlist: wishlist ? wishlist.split(",").map((book) => book.trim()) : [],
-      address: address ? JSON.parse(address) : {},
+      address: address,
     };
 
     // Si un nouveau mot de passe est fourni, on le hache avant de l'enregistrer
@@ -176,12 +194,8 @@ exports.showLoginForm = (req, res) => {
 exports.login = async (req, res) => {
   try {
     const { email, password, role } = req.body; // Récupération du rôle
-    console.log("Données reçues :", { email, password, role });
-
     // Vérifier si l'utilisateur existe
     const user = await User.findOne({ email });
-    console.log("Utilisateur trouvé :", user ? user._id : "Aucun utilisateur");
-
     if (!user) {
       return res
         .status(400)
@@ -213,9 +227,9 @@ exports.login = async (req, res) => {
     res.locals.user = req.session.user;
     // Redirection selon le rôle
     if (user.role === "admin") {
-      return res.render("pages/admin-index");
+      return res.redirect("/admin-index");
     } else {
-      return res.render("pages/dashboard-studiant", { user });
+      return res.redirect("/dashboard-studiant/" + user._id);
     }
   } catch (err) {
     console.error("Erreur lors de la connexion :", err);
@@ -227,23 +241,23 @@ exports.login = async (req, res) => {
 
 exports.forgotPassword = (req, res, next) => {
   try {
-    res.render('pages/forgot-password');
+    res.render("pages/forgot-password");
   } catch (e) {
     console.error(e);
     res.status(403).json({ error: e });
   }
 };
 
-// Logout a user
+//Logout a user
 
-// exports.logoutUser = async (req, res) => {
-//   try {
-//     req.session.destroy()
-//     res.redirect("/login")
-//     res.status(200).json({ message: "User logged out" });
-//   } catch (err) {
-//     res.status(404).json({ message: err.message });
-//   }
-// }
+exports.logoutUser = async (req, res) => {
+  try {
+    req.session.destroy();
+    res.redirect("/login");
+    res.status(200).json({ message: "User logged out" });
+  } catch (err) {
+    res.status(404).json({ message: err.message });
+  }
+};
 
 // Description: Ce fichier contient les fonctions qui sont utilisées pour interagir avec le modèle d'utilisateur.

@@ -11,52 +11,97 @@
       <header>
         <h1>Bienvenue <%= user.first %> <%= user.last %></h1>
       </header>
-
-      <div class="user-details">
-        <img
+      <div>
+        <div>
+          <img
           src="<%= user.avatar || '/images/default-avatar.png' %>"
           alt="Avatar"
           class="user-avatar"
         />
-        <h2><%= user.first %> <%= user.last %></h2>
-        <p><strong>Email :</strong> <%= user.email %></p>
-        <p><strong>Âge :</strong> <%= user.age || 'N/A' %> ans</p>
-        <p><strong>Rôle :</strong> <%= user.role %></p>
-        <p><strong>Bio :</strong> <%= user.bio || 'Pas de bio disponible' %></p>
-        <p><strong>Membre Premium :</strong> <%= user.isPremiumMember ? "Oui" : "Non" %></p>
-
-        <% if (user.address) { %>
-        <h3>Adresse</h3>
-        <p><%= user.address.street || '' %></p>
-        <p><%= user.address.city || '' %>, <%= user.address.zip || '' %></p>
-        <% } %>
-
-        <h3>Préférences de lecture</h3>
-        <ul>
-          <% if (user.genre_preferences.length > 0) { %>
-          <% user.genre_preferences.forEach(genre => { %>
-          <li><%= genre %></li>
-          <% }); %>
-          <% } else { %>
-          <li>Aucune préférence renseignée</li>
-          <% } %>
-        </ul>
-
-        <h3>Livres favoris</h3>
-        <ul>
-          <% if (user.favorite_books.length > 0) { %>
-          <% user.favorite_books.forEach(book => { %>
-          <li><%= book %></li>
-          <% }); %>
-          <% } else { %>
-          <li>Aucun livre favori</li>
-          <% } %>
-        </ul>
-
         </div>
+        <div class="user-details">
+          <h2><%= user.first %> <%= user.last %></h2>
+          <p><strong>Email :</strong> <%= user.email %></p>
+          <p>
+            <strong>Date de naissance :</strong> 
+            <%= user.birthday_date ? user.birthday_date.toISOString().slice(0, 10) : 'N/A' %>
+          </p>
+          <p><strong>Rôle :</strong> <%= user.role %></p>
+          <p><strong>Bio :</strong> <%= user.bio || 'Pas de bio disponible' %></p>
+          <p><strong>Membre Premium :</strong> <%= user.isPremiumMember ? "Oui" : "Non" %></p>
 
-        <a href="/users" class="back-btn">⬅ Retour à la liste</a>
+          <% if (user.address) { %>
+            <h3>Adresse</h3>
+            <p><%= user.address %></p>
+          <% } %>
+    
+          <h3>Préférences de lecture</h3>
+          <ul>
+            <% if (user.genre_preferences.length > 0) { %>
+              <% user.genre_preferences.forEach(genre => { %>
+                <li><%= genre %></li>
+              <% }); %>
+            <% } else { %>
+              <li>Aucune préférence renseignée</li>
+            <% } %>
+          </ul>
+    
+          <h3>Livres favoris</h3>
+          <ul>
+            <% if (user.favorite_books.length > 0) { %>
+              <% user.favorite_books.forEach(book => { %>
+                <li><%= book %></li>
+              <% }); %>
+            <% } else { %>
+              <li>Aucun livre favori</li>
+            <% } %>
+          </ul>
+        </div>
+        <div>
+          <table>
+            <thead>
+              <tr>
+                <th>Livre</th>
+                <th>Emprunteur</th>
+                <th>Date d'emprunt</th>
+                <th>Date de retour</th>
+                <th>Statut</th>
+              </tr>
+            </thead>
+            <tbody id="borrowTable">
+              <% 
+                // On filtre les emprunts pour ne garder que ceux de l'utilisateur connecté
+                const userBorrows = borrows.filter(borrow => borrow.user.id === user.id);
+              %>
+              <% if (userBorrows.length === 0) { %>
+                <tr>
+                  <td colspan="5">Aucun emprunt trouvé.</td>
+                </tr>
+              <% } else { %>
+                <% userBorrows.forEach(borrow => { %>
+                  <tr>
+                    <td><%= borrow.book.title %></td>
+                    <td><%= borrow.user.first %> <%= borrow.user.last %></td>
+                    <td><%= new Date(borrow.date_borrow).toLocaleDateString() %></td>
+                    <td><%= new Date(borrow.date_return).toLocaleDateString() %></td>
+                    <td>
+                      <% if (borrow.status === 'En cours') { %>
+                        <span style="color: orange;">En cours</span>
+                      <% } else if (borrow.status === 'Retourné') { %>
+                        <span style="color: green;">Retourné</span>
+                      <% } else { %>
+                        <span style="color: red;">Non valide</span>
+                      <% } %>
+                    </td>
+                  </tr>
+                <% }); %>
+              <% } %>
+            </tbody>
+          </table>
+        </div>
       </div>
+      <a href="/books" class="back-btn">⬅ Retour à la liste</a>
+    </div>
     </div>
   </body>
 </html>

@@ -56,15 +56,16 @@
           placeholder="Entrez la description du livre"
         ></textarea>
       </div>
-      <div>
-        <label for="genre">Genre :</label>
-        <input
-          type="text"
-          id="genre"
-          name="genre"
-          required
-          placeholder="Entrez le genre du livre"
-        />
+      <div class="input-group">
+        <label for="genre">Genre</label>
+        <select id="genre" name="genre" required>
+          <option value="science-fiction">science-fiction</option>
+          <option value="horreur">horreur</option>
+          <option value="fantasy">fantasy</option>
+          <option value="fantastique">fantastique</option>
+          <option value="policier">policier</option>
+          <option value="amour">fantasy</option>
+        </select>
       </div>
       <div>
         <label for="ISBN">ISBN :</label>

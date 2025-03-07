@@ -1,37 +1,56 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= book.title %> - Détails</title>
-  <link rel="stylesheet" href="/css/book-detail.css">
-</head>
-<body>
-  <header>
-    <h1>Détails du livre</h1>
-    <nav>
-      <ul>
-        <li><a href="/">Accueil</a></li>
-        <li><a href="/books">Retour à la liste</a></li>
-      </ul>
-    </nav>
-  </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= book.title %> - Détails</title>
+    <link rel="stylesheet" href="/css/book-detail.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Détails du livre</h1>
+      <nav>
+        <ul>
+          <li><a href="/">Accueil</a></li>
+          <li><a href="/books">Retour à la liste</a></li>
+        </ul>
+      </nav>
+    </header>
 
-  <main>
-    <div class="book-details">
-      <img src="<%= book.cover %>" alt="Couverture de <%= book.title %>">
-      <h2><%= book.title %></h2>
-      <p><strong>Auteur :</strong> <%= book.author %></p>
-      <p><strong>Description :</strong> <%= book.description %></p>
-      <p><strong>Date de publication :</strong> <%= book.publication_date%></p>
-      <p><strong>Genre :</strong> <%= book.genre.join(', ') %></p>
-      <p><strong>ISBN :</strong> <%= book.ISBN %></p>
-      <p><strong>Pages :</strong> <%= book.pages %></p>
-      <p><strong>Langue :</strong> <%= book.language %></p>
-      <p><strong>Éditeur :</strong> <%= book.publisher %></p>
-      <p><strong>Format :</strong> <%= book.format %></p>
-      <p><strong>Évaluation :</strong> <%= book.rating %></p>
+    <main>
+      <div class="book-details">
+        <img src="<%= book.cover %>" alt="Couverture de <%= book.title %>" />
+        <h2><%= book.title %></h2>
+        <p><strong>Auteur :</strong> <%= book.author %></p>
+        <p><strong>Description :</strong> <%= book.description %></p>
+        <p>
+          <strong>Date de publication :</strong> 
+          <%= book.publication_date ? book.publication_date.toISOString().slice(0, 10) : 'N/A' %>
+        </p>
+        <p><strong>Genre :</strong> <%= book.genre%></p>
+        <p><strong>ISBN :</strong> <%= book.ISBN %></p>
+        <p><strong>Pages :</strong> <%= book.pages %></p>
+        <p><strong>Langue :</strong> <%= book.language %></p>
+        <p><strong>Éditeur :</strong> <%= book.publisher %></p>
+        <p><strong>Format :</strong> <%= book.format %></p>
+        <p><strong>Évaluation :</strong> <%= book.rating %></p>
+      </div>
+      <div class="book-details">
+      <% if (user && user.role === 'user') { %>
+        <form action="/book-detail/<%= book._id %>" method="POST" style="display: inline">
+          <h2>Veuillez sélectionner les dates d'emprunt</h2>
+          <label for="dateBorrow">Date d'emprunt :</label>
+          <input type="date" id="dateBorrow" name="date_borrow" required />
+        
+          <label for="dateReturn">Date de retour :</label>
+          <input type="date" id="dateReturn" name="date_return" required />
+        
+          <button type="submit" class="borrow-btn" onclick="return confirm('Confirmer l\'emprunt de ce livre ?')">
+            Emprunter
+          </button>
+        </form>
+      <% } %>
     </div>
-  </main>
-</body>
+    </main>
+  </body>
 </html>

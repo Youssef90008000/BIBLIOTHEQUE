@@ -66,12 +66,12 @@
           />
         </div>
         <div class="input-group">
-          <label for="age">Âge</label>
+          <label for="birthday_date">Date de naissance</label>
           <input
-            type="number"
-            id="age"
-            name="age"
-            placeholder="Entrer votre âge"
+            type="date"
+            id="birthday_date"
+            name="birthday_date"
+            placeholder="Entrer votre date de naissance"
           />
         </div>
         <div class="input-group">
@@ -102,7 +102,10 @@
         </div>
         <div class="input-group">
           <label for="isPremiumMember">Abonnement premium</label>
-          <input type="checkbox" id="isPremiumMember" name="isPremiumMember" />
+          <select id="isPremiumMember" name="isPremiumMember">
+            <option value="true">premium</option>
+            <option value="admin">non premium</option>
+          </select>
         </div>
         <div class="input-group">
           <label for="address">Adresse</label>

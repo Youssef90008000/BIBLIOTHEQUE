@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
-    <link rel="stylesheet" href="css/login.css" />
+    <link rel="stylesheet" href="css/styles.css" />
   </head>
   <body>
     <header>
@@ -32,7 +32,9 @@
               required
               autocomplete="current-password"
             />
-            <span id="togglePassword" class="eye-icon" style="cursor: pointer">👁️</span>
+            <span id="togglePassword" class="eye-icon" style="cursor: pointer"
+              >👁️</span
+            >
           </div>
         </div>
 
@@ -43,53 +45,66 @@
             <option value="admin">Agent</option>
           </select>
         </div>
-        
-        <button type="submit" id="loginBtn" class="login-btn">Se connecter</button>
+
+        <button type="submit" id="loginBtn" class="login-btn">
+          Se connecter
+        </button>
+
+        <!-- Mot de passe oublié -->
+        <p class="forgot-password">
+          <a href="/forgot-password" id="forgotPassword"
+            >Mot de passe oublié ?</a
+          >
+        </p>
       </form>
-      
-      <!-- Mot de passe oublié -->
-      <p  class="forgot-password"><a href="/forgot-password" id="forgotPassword">Mot de passe oublié ?</a></p>
     </div>
 
     <script>
       // Gestion des rôles
-      document.getElementById("loginForm").addEventListener("submit", function (event) {
-        const role = document.getElementById("role").value;
-        const email = document.getElementById("email").value;
-        
-        // Vérification simple
-        if (!email.includes("@")) {
-          event.preventDefault();
-          document.getElementById("error-message").textContent = "Veuillez entrer un email valide.";
-          document.getElementById("error-message").style.display = "block";
-          return;
-        }
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", function (event) {
+          const role = document.getElementById("role").value;
+          const email = document.getElementById("email").value;
 
-        console.log("Connexion en tant que :", role); // Debug en console
-      });
+          // Vérification simple
+          if (!email.includes("@")) {
+            event.preventDefault();
+            document.getElementById("error-message").textContent =
+              "Veuillez entrer un email valide.";
+            document.getElementById("error-message").style.display = "block";
+            return;
+          }
+        });
 
       // Gestion de l'affichage du mot de passe
-      document.getElementById("togglePassword").addEventListener("click", function () {
-        const passwordField = document.getElementById("password");
-        if (passwordField.type === "password") {
-          passwordField.type = "text";
-          this.textContent = "🙈"; // Icône pour masquer
-        } else {
-          passwordField.type = "password";
-          this.textContent = "👁️"; // Icône pour afficher
-        }
-      });
+      document
+        .getElementById("togglePassword")
+        .addEventListener("click", function () {
+          const passwordField = document.getElementById("password");
+          if (passwordField.type === "password") {
+            passwordField.type = "text";
+            this.textContent = "🙈"; // Icône pour masquer
+          } else {
+            passwordField.type = "password";
+            this.textContent = "👁️"; // Icône pour afficher
+          }
+        });
 
       // Gestion du mot de passe oublié
-      document.getElementById("forgotPassword").addEventListener("click", function () {
-        const email = prompt("Veuillez entrer votre email pour réinitialiser votre mot de passe :");
-        if (email && email.includes("@")) {
-          alert("Un lien de réinitialisation a été envoyé à " + email);
-          // Ici, une requête AJAX peut être envoyée au serveur pour traiter la demande
-        } else {
-          alert("Veuillez entrer un email valide.");
-        }
-      });
+      document
+        .getElementById("forgotPassword")
+        .addEventListener("click", function () {
+          const email = prompt(
+            "Veuillez entrer votre email pour réinitialiser votre mot de passe :"
+          );
+          if (email && email.includes("@")) {
+            alert("Un lien de réinitialisation a été envoyé à " + email);
+            // Ici, une requête AJAX peut être envoyée au serveur pour traiter la demande
+          } else {
+            alert("Veuillez entrer un email valide.");
+          }
+        });
     </script>
   </body>
 </html>

@@ -20,16 +20,17 @@
         />
         <h2><%= user.first %> <%= user.last %></h2>
         <p><strong>Email :</strong> <%= user.email %></p>
-        <p><strong>Âge :</strong> <%= user.age || 'N/A' %> ans</p>
+        <p>
+          <strong>Date de naissance :</strong> 
+          <%= user.birthday_date ? user.birthday_date.toISOString().slice(0, 10) : 'N/A' %>
+        </p>
         <p><strong>Rôle :</strong> <%= user.role %></p>
         <p><strong>Bio :</strong> <%= user.bio || 'Pas de bio disponible' %></p>
         <p><strong>Membre Premium :</strong> <%= user.isPremiumMember ? "Oui" : "Non" %></p>
-
-        <% if (user.address) { %>
         <h3>Adresse</h3>
-        <p><%= user.address.street || '' %></p>
-        <p><%= user.address.city || '' %>, <%= user.address.zip || '' %></p>
-        <% } %>
+        <p><%= user.address%></p>
+      
+        
 
         <h3>Préférences de lecture</h3>
         <ul>
@@ -53,27 +54,7 @@
           <% } %>
         </ul>
 
-        <% if (user && user.role === 'admin') { %>
-        <div class="admin-actions">
-          <a href="/update-user/<%= user._id %>" class="edit-btn">✏️ Modifier</a>
-          |
-          <form
-            action="/users/<%= user._id %>?_method=DELETE"
-            method="POST"
-            style="display: inline"
-          >
-            <button
-              type="submit"
-              class="delete-btn"
-              onclick="return confirm('Voulez-vous vraiment supprimer cet utilisateur ?')"
-            >
-              🗑️ Supprimer
-            </button>
-          </form>
-        </div>
-        <% } %>
-
-        <a href="/users" class="back-btn">⬅ Retour à la liste</a>
+        <a href="/" class="back-btn">⬅ Retour à la liste</a>
       </div>
     </div>
   </body>

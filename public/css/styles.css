@@ -1,0 +1,422 @@
+/* ---------- RESET & VARIABLES ---------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  :root {
+    --primary-bg: #f4f4f4;          /* Fond général */
+    --secondary-bg: #fff;           /* Fond des éléments (cartes, formulaires, etc.) */
+    --background-color: #F5F5F5;     /* Fond alternatif */
+    --text-color: #264653;          /* Bleu foncé pour le texte */
+    --accent-yellow: #E9C46A;        /* Jaune pour les titres */
+    --green: #2A9D8F;               /* Vert pour les boutons et bordures */
+    --red: #E76F51;                 /* Rouge pour les alertes et hover */
+    --orange: #F4A261;              /* Orange pour certains accents */
+    --blue: #007BFF;                /* Bleu pour certains boutons */
+    --input-bg-color: #fff;         /* Fond des inputs */
+    --input-border-color: #ddd;     /* Bordure par défaut des inputs */
+    --button-bg-color: #264653;     /* Fond des boutons principaux */
+    --button-hover-bg-color: #1D3D45; /* Fond des boutons au survol */
+    --button-text-color: #fff;      /* Texte des boutons */
+    --font-family: Arial, sans-serif;
+  }
+  
+  /* ---------- STYLES GLOBAUX ---------- */
+  body {
+    font-family: var(--font-family);
+    background-color: var(--primary-bg);
+    color: var(--text-color);
+    line-height: 1.6;
+    padding: 20px;
+  }
+  
+  /* ---------- CONTAINERS ---------- */
+  .container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  /* ---------- HEADER & NAVIGATION ---------- */
+  header {
+    background-color: var(--text-color);
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  header h1 {
+    color: var(--accent-yellow);
+    font-size: 2em;
+  }
+  
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+  }
+  
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+  }
+  
+  .nav-links li a {
+    color: #fff;
+    padding: 10px 15px;
+    background-color: var(--green);
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+  
+  .nav-links a:hover {
+    background-color: var(--red);
+  }
+  
+  /* ---------- SEARCH BAR ---------- */
+  .search-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .search-bar input[type="text"] {
+    padding: 10px;
+    width: 300px;
+    border: 2px solid var(--green);
+    border-right: none;
+    border-radius: 4px 0 0 4px;
+    outline: none;
+    transition: border-color 0.3s ease;
+  }
+  
+  .search-bar input[type="text"]:focus {
+    border-color: var(--red);
+  }
+  
+  .search-bar .submit-btn {
+    background-color: var(--green);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .search-bar .submit-btn:hover {
+    background-color: var(--red);
+  }
+  
+  /* ---------- FORMULAIRES ---------- */
+  form {
+    background-color: var(--secondary-bg);
+    padding: 20px 30px;
+    border-radius: 8px;
+    margin: 0 auto 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+  }
+  
+  form div {
+    margin-bottom: 15px;
+  }
+  
+  form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: var(--text-color);
+  }
+  
+  form input[type="text"],
+  form input[type="url"],
+  form input[type="email"],
+  form input[type="password"],
+  form input[type="number"],
+  form textarea,
+  form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid var(--input-border-color);
+    border-radius: 4px;
+    font-size: 1em;
+    background-color: var(--input-bg-color);
+    color: var(--text-color);
+    transition: border-color 0.3s ease;
+  }
+  
+  form input:focus,
+  form textarea:focus,
+  form select:focus {
+    outline: none;
+    border-color: var(--red);
+  }
+  
+  form textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+  
+  /* ---------- BOUTONS ---------- */
+  button,
+  a.btn,
+  .submit-btn {
+    display: inline-block;
+    background-color: var(--green);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1em;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover,
+  a.btn:hover,
+  .submit-btn:hover {
+    background-color: var(--red);
+  }
+  
+  /* ---------- TABLES ---------- */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+  }
+  
+  table th,
+  table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  table th {
+    background-color: var(--green);
+    color: #fff;
+  }
+  
+  table tr:hover {
+    background-color: var(--primary-bg);
+  }
+  
+  /* ---------- CARTES & RECOMMANDATIONS ---------- */
+  .card, .action-card, .book-card, .favorite-book, .user-details {
+    background-color: var(--secondary-bg);
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .book-card {
+    width: 30%;
+    margin: 15px;
+  }
+  
+  .book-recommendations {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+  
+  .book-card h3 {
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+  
+  .book-card p {
+    font-size: 16px;
+    color: #666;
+  }
+  
+  .borrow-btn {
+    padding: 10px 15px;
+    background-color: var(--blue);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+  
+  .borrow-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  /* ---------- SECTION SIGNUP / REGISTRATION ---------- */
+  .hero {
+    background-color: var(--green);
+    padding: 60px 20px;
+    text-align: center;
+    color: #fff;
+  }
+  
+  .hero-content h2 {
+    font-size: 2.5em;
+    color: var(--accent-yellow);
+    margin-bottom: 20px;
+  }
+  
+  .signup-container {
+    background-color: var(--secondary-bg);
+    width: 90%;
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .signup-form {
+    width: 100%;
+  }
+  
+  .input-group {
+    margin-bottom: 15px;
+  }
+  
+  .input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: var(--text-color);
+  }
+  
+  .input-group input,
+  .input-group select,
+  .input-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid var(--green);
+    border-radius: 4px;
+    font-size: 1em;
+    transition: border-color 0.3s ease;
+  }
+  
+  .input-group input:focus,
+  .input-group select:focus,
+  .input-group textarea:focus {
+    outline: none;
+    border-color: var(--red);
+  }
+  
+  .input-group textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+  
+  .submit-btn {
+    background-color: var(--green);
+    color: #fff;
+    border: none;
+    padding: 12px;
+    font-size: 1.1em;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    margin-top: 10px;
+  }
+  
+  .submit-btn:hover {
+    background-color: var(--red);
+  }
+  
+  /* ---------- PROFIL & USER DETAILS ---------- */
+  .user-avatar {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border: 5px solid var(--orange);
+  }
+  
+  .back-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: var(--red);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .back-btn:hover {
+    background-color: var(--orange);
+  }
+  
+  /* ---------- UPDATE BOOK FORM ---------- */
+  .updateForm {
+    background-color: var(--green);
+    color: #fff;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: block;
+    margin: 20px auto;
+  }
+  
+  .updateForm:hover {
+    background-color: var(--red);
+  }
+  
+  /* ---------- FOOTER ---------- */
+  footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    margin-top: 50px;
+  }
+  
+  /* ---------- RESPONSIVE DESIGN ---------- */
+  @media (max-width: 768px) {
+    .nav-links {
+      flex-direction: column;
+      align-items: center;
+    }
+    .book-recommendations {
+      flex-direction: column;
+      align-items: center;
+    }
+    .book-card {
+      width: 80%;
+      margin-bottom: 20px;
+    }
+    .signup-container,
+    form,
+    .contact-form {
+      padding: 15px 20px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    header h1 {
+      font-size: 1.8em;
+    }
+    .hero-content h2 {
+      font-size: 2em;
+    }
+    .nav-links li {
+      margin: 10px 0;
+    }
+  }
+  

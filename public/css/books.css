@@ -101,6 +101,14 @@ body {
     color: white;
   }
   
+  .borrow-btn{
+    background-color: #2A9D8F;
+    padding: 8px 12px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: white;
+  }
+  
   .edit-btn {
     background-color: #E9C46A;
     color: white;

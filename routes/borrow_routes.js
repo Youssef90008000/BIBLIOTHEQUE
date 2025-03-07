@@ -10,5 +10,7 @@ router.get('/borrows-create', borrowController.addBorrowPage);
 
 // Ajouter un emprunt
 router.post('/borrows-create', borrowController.addBorrow);
+// Ajouter un emprunt
+router.post('/book-detail/:id', borrowController.addBorrowUser);
 
 module.exports = router;

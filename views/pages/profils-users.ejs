@@ -33,7 +33,7 @@
             <th>Avatar</th>
             <th>Nom</th>
             <th>Email</th>
-            <th>Âge</th>
+            <th>Date de naissance</th>
             <th>Rôle</th>
             <th>Actions</th>
           </tr>
@@ -51,7 +51,7 @@
             </td>
             <td><%= userItem.first %> <%= userItem.last %></td>
             <td><%= userItem.email %></td>
-            <td><%= userItem.age || 'N/A' %> ans</td>
+            <td><%= userItem.birthday_date ? userItem.birthday_date.toISOString().slice(0, 10) : 'N/A' %></td>
             <td><%= userItem.role %></td>
             <td>
               <a href="/user-details/<%= userItem._id %>">Détails</a>
