@@ -125,6 +125,12 @@ tbody img {
   border-radius: 50%;
 }
 
+/* Actions */
+.actions {
+  display: flex;
+  justify-content: center;
+}
+
 /* Liens d'actions */
 a {
   text-decoration: none;

@@ -10,9 +10,10 @@
     <header>
         <h1>Ajouter un Emprunt</h1>
     </header>
-
+    
     <main>
         <h2>Formulaire d'ajout d'un emprunt</h2>
+              
         <form id="borrowForm" action="/bibliotheque/borrows-create" method="POST">
             <!-- Sélection de l'utilisateur -->
             <label for="userSelect">Utilisateur :</label>
@@ -40,7 +41,12 @@
             <label for="dateReturn">Date de retour :</label>
             <input type="date" id="dateReturn" name="date_return" required>
 
-            <button type="submit">Ajouter</button>
+            <button type="submit" class="button">Ajouter</button>
+            <% if (user && user.role === 'admin') { %>
+                  <div>
+                    <a href="/profils-users" class="button">Retour aux utilisateurs</a>
+                  </div>
+                <% } %>
         </form>
 
         <!-- Message d'erreur -->

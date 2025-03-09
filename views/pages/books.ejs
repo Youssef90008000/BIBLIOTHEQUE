@@ -21,25 +21,32 @@
         <button class="submit-btn">Rechercher</button>
       </div>
       <% if (user && user.role === 'admin') { %>
-      <div class="add-book">
-        <a href="/add-book" class="submit-btn">Ajouter un livre</a>
+      <div class="actions">
+          <div class="add-book">
+            <a href="/add-book" class="submit-btn">Ajouter un livre</a>
+          </div>
+          <div class="add-book">
+            <a href="/admin-index" class="submit-btn">Retour au menu</a>
+          </div>
+        </div>
       </div>
       <% } %>
-      
+
       <div class="book-grid">
-        <% if (books.length > 0) { %> 
-        <% books.forEach(book => { %>
+        <% if (books.length > 0) { %> <% books.forEach(book => { %>
         <div class="book-card">
-          <img src="<%= book.cover %>" alt="image" class="book-cover"/>
-          <div class = "book-info">
-                      <h3><%= book.title %></h3>
-          <p>Auteur : <%= book.author %></p>
-          <p>ISBN : <%= book.ISBN %></p>
-          <p><%= book.pages %> Pages</p>
+          <img src="<%= book.cover %>" alt="image" class="book-cover" />
+          <div class="book-info">
+            <h3><%= book.title %></h3>
+            <p>Auteur : <%= book.author %></p>
+            <p>ISBN : <%= book.ISBN %></p>
+            <p><%= book.pages %> Pages</p>
           </div>
 
           <div class="book-actions">
-            <a href="/book-detail/<%= book._id %>" class="detail-btn">Détails</a>
+            <a href="/book-detail/<%= book._id %>" class="detail-btn"
+              >Détails</a
+            >
             <% if (user && user.role === 'admin') { %>
             <a href="/update-book/<%= book._id %>" class="edit-btn">Modifier</a>
             <form
@@ -58,8 +65,7 @@
             <% } %>
           </div>
         </div>
-        <% }); %> 
-        <% } else { %>
+        <% }); %> <% } else { %>
         <p>Aucun livre disponible pour le moment.</p>
         <% } %>
       </div>

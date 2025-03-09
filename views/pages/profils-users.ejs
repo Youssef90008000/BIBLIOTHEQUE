@@ -22,8 +22,16 @@
       </div>
 
       <% if (user && user.role === 'admin') { %>
-      <div class="add-user">
-        <a href="/register" class="submit-btn">Ajouter un utilisateur</a>
+      <div class="actions">
+        <div class="add-user">
+          <a href="/register" class="submit-btn">Ajouter un utilisateur</a>
+        </div>
+        <div class="add-user">
+          <a href="/admin-index" class="submit-btn">Retour au menu</a>
+        </div>
+        <div class="add-user">
+          <a href="/borrows-create" class="submit-btn">Ajouter un emprunt</a>
+        </div>
       </div>
       <% } %>
 
@@ -39,8 +47,7 @@
           </tr>
         </thead>
         <tbody>
-          <% if (users.length > 0) { %> 
-          <% users.forEach(userItem => { %>
+          <% if (users.length > 0) { %> <% users.forEach(userItem => { %>
           <tr>
             <td>
               <img
@@ -51,7 +58,10 @@
             </td>
             <td><%= userItem.first %> <%= userItem.last %></td>
             <td><%= userItem.email %></td>
-            <td><%= userItem.birthday_date ? userItem.birthday_date.toISOString().slice(0, 10) : 'N/A' %></td>
+            <td>
+              <%= userItem.birthday_date ?
+              userItem.birthday_date.toISOString().slice(0, 10) : 'N/A' %>
+            </td>
             <td><%= userItem.role %></td>
             <td>
               <a href="/user-details/<%= userItem._id %>">Détails</a>
@@ -70,14 +80,13 @@
                   class="delete-btn"
                   onclick="return confirm('Voulez-vous vraiment supprimer cet utilisateur ?')"
                 >
-                Supprimer
+                  Supprimer
                 </button>
               </form>
               <% } %>
             </td>
           </tr>
-          <% }); %> 
-          <% } else { %>
+          <% }); %> <% } else { %>
           <tr>
             <td colspan="6">Aucun utilisateur trouvé.</td>
           </tr>
@@ -96,7 +105,8 @@
           rows.forEach((row) => {
             let name = row.cells[1].innerText.toLowerCase();
             let email = row.cells[2].innerText.toLowerCase();
-            row.style.display = name.includes(filter) || email.includes(filter) ? "" : "none";
+            row.style.display =
+              name.includes(filter) || email.includes(filter) ? "" : "none";
           });
         });
     </script>

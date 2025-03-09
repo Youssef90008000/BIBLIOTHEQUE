@@ -10,6 +10,12 @@ router.get('/borrows-create', borrowController.addBorrowPage);
 
 // Ajouter un emprunt
 router.post('/borrows-create', borrowController.addBorrow);
+// Récupérer un emprunt par son id
+router.get('/borrow-details/:id', borrowController.getBorrowById);
+// Mettre à jour un emprunt par son id
+router.post('/borrow-details/:id', borrowController.updateBorrow);
+// Supprimer un emprunt par son id
+router.delete('/borrows/:id', borrowController.deleteBorrow);
 // Ajouter un emprunt
 router.post('/book-detail/:id', borrowController.addBorrowUser);
 

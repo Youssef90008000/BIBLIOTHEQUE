@@ -1,51 +1,71 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Gestion des Emprunts - Bibliothèque</title>
     <link rel="stylesheet" href="/css/borrows.css" />
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <h1>Liste des Emprunts</h1>
+      <h1>Liste des Emprunts</h1>
     </header>
 
     <div class="container">
-        <table>
-            <thead>
-                <tr>
-                    <th>Livre</th>
-                    <th>Emprunteur</th>
-                    <th>Date d'emprunt</th>
-                    <th>Date de retour</th>
-                    <th>Statut</th>
-                </tr>
-            </thead>
-            <tbody id="borrowTable">
-                <% if (borrows.length === 0) { %>
-                    <tr><td colspan="5">Aucun emprunt trouvé.</td></tr>
-                <% } else { %>
-                    <% borrows.forEach(borrow => { %>
-                        <tr>
-                            <td><%= borrow.book.title %></td>
-                            <td><%= borrow.user.first %> <%= borrow.user.last %></td>
-                            <td><%= new Date(borrow.date_borrow).toLocaleDateString() %></td>
-                            <td><%= new Date(borrow.date_return).toLocaleDateString() %></td>
-                            <td>
-                                <% if (borrow.status === 'En cours') { %>
-                                    <span style="color: orange;">En cours</span>
-                                <% } else if (borrow.status === 'Retourné') { %>
-                                    <span style="color: green;">Retourné</span>
-                                <% } else { %>
-                                    <span style="color: red;">Non valide</span>
-                                <% } %>
-                            </td>
-                        </tr>
-                    <% }) %>
-                <% } %>
-            </tbody>
-        </table>
+      <table>
+        <thead>
+          <tr>
+            <th>Livre</th>
+            <th>Emprunteur</th>
+            <th>Date d'emprunt</th>
+            <th>Date de retour</th>
+            <th>Statut</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="borrowTable">
+          <% if (borrows.length === 0) { %>
+          <tr>
+            <td colspan="5">Aucun emprunt trouvé.</td>
+          </tr>
+          <% } else { %> <% borrows.forEach(borrow => { %>
+            <td><%= borrow.book.title %></td>
+            <td><%= borrow.user.first %> <%= borrow.user.last %></td>
+            <td><%= new Date(borrow.date_borrow).toLocaleDateString() %></td>
+            <td><%= new Date(borrow.date_return).toLocaleDateString() %></td>
+            <td>
+              <% if (borrow.status === 'En cours') { %>
+              <span style="color: orange">En cours</span>
+              <% } else if (borrow.status === 'Retourné') { %>
+              <span style="color: green">Retourné</span>
+              <% } else { %>
+              <span style="color: red">Non valide</span>
+              <% } %>
+            </td>
+          <td>
+            <div class="actions">
+              <% if (user && user.role === 'admin') { %>
+              <a href="/borrow-details/<%= borrow._id %>">Détails</a>
+              <form
+                action="/borrows/<%= borrow._id %>?_method=DELETE"
+                method="POST"
+                style="display: inline"
+              >
+                <button
+                  type="submit"
+                  class="delete-btn"
+                  onclick="return confirm('Voulez-vous vraiment supprimer cet emprunts ?')"
+                >
+                  Supprimer
+                </button>
+              </form>
+            </div>
+        </tr> 
+            <% } %>
+          </td>
+          <% }) %> <% } %>
+        </tbody>
+      </table>
     </div>
-</body>
+  </body>
 </html>

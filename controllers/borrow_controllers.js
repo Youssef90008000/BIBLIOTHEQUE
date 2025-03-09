@@ -123,3 +123,62 @@ exports.addBorrowUser = async (req, res) => {
     res.status(500).json({ message: "Erreur interne du serveur." });
   }
 };
+exports.getBorrowById = async (req, res) => {
+  try {
+    const borrowId = req.params.id;
+    const borrow = await Borrow.findById(borrowId).populate("user").populate("book");
+
+    if (!borrow) {
+      return res.status(404).json({ message: "Emprunt introuvable." });
+    }
+
+    res.render("pages/borrow-details", { borrow });
+  } catch (error) {
+    console.error("Erreur lors de la récupération de l'emprunt:", error);
+    res.status(500).json({ message: "Erreur interne du serveur." });
+  }
+}
+exports.updateBorrow = async (req, res) => {
+  try {
+    const borrowId = req.params.id;
+    const { status } = req.body;
+
+    if (!status) {
+      return res.status(400).json({ message: "Le statut est obligatoire." });
+    }
+
+    const borrow = await Borrow.findById(borrowId);
+
+    if (!borrow) {
+      return res.status(404).json({ message: "Emprunt introuvable." });
+    }
+
+    borrow.status = status;
+
+    await borrow.save();
+
+    res.redirect(`/borrow-details/${borrowId}`);
+  } catch (error) {
+    console.error("Erreur lors de la mise à jour de l'emprunt:", error);
+    res.status(500).json({ message: "Erreur interne du serveur." });
+  }
+}
+exports.deleteBorrow = async (req, res) => {
+  try {
+    const borrowId = req.params.id;
+    const borrow = await Borrow.findById(borrowId);
+
+    if (!borrow) {
+      return res.status(404).json({ message: "Emprunt introuvable." });
+    }
+
+    borrow.is_deleted = true;
+
+    await borrow.save();
+
+    res.json(borrow);
+  } catch (error) {
+    console.error("Erreur lors de la suppression de l'emprunt:", error);
+    res.status(500).json({ message: "Erreur interne du serveur." });
+  }
+}
