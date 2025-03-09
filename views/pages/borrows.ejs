@@ -10,7 +10,13 @@
     <header>
       <h1>Liste des Emprunts</h1>
     </header>
-
+    <div class="search-bar">
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Rechercher un livre ou un emprunteur..."
+      />
+    </div>
     <div class="container">
       <table>
         <thead>
@@ -26,46 +32,76 @@
         <tbody id="borrowTable">
           <% if (borrows.length === 0) { %>
           <tr>
-            <td colspan="5">Aucun emprunt trouvé.</td>
+            <td colspan="6">Aucun emprunt trouvé.</td>
           </tr>
           <% } else { %> <% borrows.forEach(borrow => { %>
+          <tr>
             <td><%= borrow.book.title %></td>
             <td><%= borrow.user.first %> <%= borrow.user.last %></td>
             <td><%= new Date(borrow.date_borrow).toLocaleDateString() %></td>
-            <td><%= new Date(borrow.date_return).toLocaleDateString() %></td>
+            <td>
+              <%= borrow.date_return ? new
+              Date(borrow.date_return).toLocaleDateString() : 'Non défini' %>
+            </td>
             <td>
               <% if (borrow.status === 'En cours') { %>
-              <span style="color: orange">En cours</span>
+                <span style="color: orange">En cours</span>
               <% } else if (borrow.status === 'Retourné') { %>
-              <span style="color: green">Retourné</span>
-              <% } else { %>
-              <span style="color: red">Non valide</span>
+                <span style="color: green">Retourné</span>
+              <% } else if (borrow.status === "Validé") { %>
+                <span style="color: blue">Validé</span>
+              <% } else if (borrow.status === "non valide") { %>
+                <span style="color: red">Non valide</span>
               <% } %>
             </td>
-          <td>
-            <div class="actions">
-              <% if (user && user.role === 'admin') { %>
-              <a href="/borrow-details/<%= borrow._id %>">Détails</a>
-              <form
-                action="/borrows/<%= borrow._id %>?_method=DELETE"
-                method="POST"
-                style="display: inline"
-              >
-                <button
-                  type="submit"
-                  class="delete-btn"
-                  onclick="return confirm('Voulez-vous vraiment supprimer cet emprunts ?')"
+            
+            <% if (user && user.role === 'admin') { %>
+            <td>
+              <div class="actions">
+                <a href="/borrow-details/<%= borrow._id %>">Détails</a>
+                <form
+                  action="/borrows/<%= borrow._id %>?_method=DELETE"
+                  method="POST"
+                  style="display: inline"
                 >
-                  Supprimer
-                </button>
-              </form>
-            </div>
-        </tr> 
+                  <button
+                    type="submit"
+                    class="delete-btn"
+                    onclick="return confirm('Voulez-vous vraiment supprimer cet emprunt ?')"
+                  >
+                    🗑 Supprimer
+                  </button>
+                </form>
+              </div>
+            </td>
+            <% } else { %>
+            <td>-</td>
             <% } %>
-          </td>
+          </tr>
           <% }) %> <% } %>
         </tbody>
       </table>
     </div>
+    <script>
+      document
+        .getElementById("searchInput")
+        .addEventListener("input", function () {
+          let filter = this.value.toLowerCase();
+          document.querySelectorAll("#borrowTable tr").forEach((row) => {
+            let titleCell =
+              row.cells.length > 0
+                ? row.cells[0].textContent.toLowerCase()
+                : "";
+            let userCell =
+              row.cells.length > 1
+                ? row.cells[1].textContent.toLowerCase()
+                : "";
+            row.style.display =
+              titleCell.includes(filter) || userCell.includes(filter)
+                ? ""
+                : "none";
+          });
+        });
+    </script>
   </body>
 </html>

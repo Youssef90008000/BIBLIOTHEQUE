@@ -2,20 +2,20 @@ const Borrow = require("../models/borrow_models"); // Modèle Mongoose pour les 
 const User = require("../models/user_models"); // Modèle Mongoose pour les utilisateurs
 const Book = require("../models/book_models"); // Modèle Mongoose pour les livres
 
-// Récupérer tous les emprunts avec les détails des utilisateurs et des livres
+
 exports.getAllBorrows = async (req, res) => {
   try {
     const borrows = await Borrow.find().populate("user").populate("book");
-    res.render("pages/borrows", { borrows });
+    res.render("pages/borrows", { borrows});
   } catch (error) {
-    res
-      .status(500)
-      .json({
-        message: "Erreur lors de la récupération des emprunts",
-        error: error.message,
-      });
+    console.error("Erreur lors de la récupération des emprunts:", error);
+    res.status(500).render("pages/error", { 
+      message: "Erreur interne du serveur lors de la récupération des emprunts.",
+      error
+    });
   }
 };
+
 
 // Afficher la page pour ajouter un emprunt
 exports.addBorrowPage = async (req, res) => {
@@ -126,18 +126,21 @@ exports.addBorrowUser = async (req, res) => {
 exports.getBorrowById = async (req, res) => {
   try {
     const borrowId = req.params.id;
-    const borrow = await Borrow.findById(borrowId).populate("user").populate("book");
+    const borrow = await Borrow.findById(borrowId)
+      .populate("user")
+      .populate("book");
 
     if (!borrow) {
       return res.status(404).json({ message: "Emprunt introuvable." });
     }
 
-    res.render("pages/borrow-details", { borrow });
+    res.render("pages/borrow-details", { borrow}); // Passer `escape` à EJS
   } catch (error) {
     console.error("Erreur lors de la récupération de l'emprunt:", error);
     res.status(500).json({ message: "Erreur interne du serveur." });
   }
-}
+};
+
 exports.updateBorrow = async (req, res) => {
   try {
     const borrowId = req.params.id;
