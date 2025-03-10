@@ -4,19 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Détails de l'Utilisateur</title>
-    <link rel="stylesheet" href="/css/profils-users.css" />
+    <link rel="stylesheet" href="/css/dashboard-studiant.css" />
   </head>
   <body>
-    <div class="container">
       <header>
         <h1>Bienvenue <%= user.first %> <%= user.last %></h1>
       </header>
-      <div>
-        <div>
+      <main>
+      <div class ="user-container">
+        <div class="user-avatar" >
           <img
           src="<%= user.avatar || '/images/default-avatar.png' %>"
           alt="Avatar"
-          class="user-avatar"
         />
         </div>
         <div class="user-details">
@@ -57,7 +56,9 @@
             <% } %>
           </ul>
         </div>
-        <div>
+      </div>
+      <div class="borrows-container">
+        <h2>Emprunts</h2>
           <table>
             <thead>
               <tr>
@@ -100,8 +101,8 @@
           </table>
         </div>
       </div>
-      <a href="/books" class="back-btn">⬅ Retour à la liste</a>
-    </div>
-    </div>
+      
+    <a href="/books" class="back-btn">⬅ Retour à la liste</a>
+  </main>
   </body>
 </html>

@@ -1,88 +1,262 @@
 <!DOCTYPE html>
 <html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Livres - Bibliothèque</title>
-    <link rel="stylesheet" href="/css/books.css" />
-  </head>
-  <body>
-    <div class="container">
-      <header>
+    <link rel="stylesheet" href="/css/books.css">
+    <style>
+        /* Styles de base */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: white;
+            color: #333;
+        }
+
+        .container {
+            display: flex;
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #e9c46a;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            padding: 20px;
+            background: #f4f4f4;
+        }
+
+        .sidebar select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        /* Contenu principal */
+        .book-list {
+            flex-grow: 1;
+            padding: 20px;
+        }
+
+        .search-bar {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .search-bar input {
+            padding: 10px;
+            width: 300px;
+            border: 1px solid #e9c46a;
+            border-radius: 5px;
+            margin-right: 10px;
+            background-color: white;
+            color: black;
+        }
+
+        .submit-btn {
+            padding: 10px 15px;
+            background-color: #2a9d8f;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .book-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .book-card {
+            width: calc(33.333% - 20px);
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Pagination */
+        .pagination {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .pagination button {
+            padding: 8px 12px;
+            margin: 5px;
+            border: none;
+            background: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+
+        .pagination button:disabled {
+            background: gray;
+            cursor: not-allowed;
+        }
+
+        /* Responsive */
+        @media (max-width: 996px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .sidebar {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+
+            .book-grid {
+                justify-content: center;
+            }
+
+            .book-card {
+                width: calc(50% - 20px);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .book-card {
+                width: 100%;
+            }
+
+            .search-bar {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .search-bar input {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
         <h1>Livres Disponibles</h1>
-      </header>
+    </header>
 
-      <div class="search-bar">
-        <input
-          type="text"
-          id="searchInput"
-          placeholder="Rechercher un livre..."
-        />
-        <button class="submit-btn">Rechercher</button>
-      </div>
-      <% if (user && user.role === 'admin') { %>
-      <div class="actions">
-          <div class="add-book">
-            <a href="/add-book" class="submit-btn">Ajouter un livre</a>
-          </div>
-          <div class="add-book">
-            <a href="/admin-index" class="submit-btn">Retour au menu</a>
-          </div>
+    <div class="container">
+        <!-- Menu latéral -->
+        <div class="sidebar">
+            <h3>Filtrer par Genre</h3>
+            <select id="genreFilter">
+                <option value="">Tous les genres</option>
+                <option value="science-fiction">Science-fiction</option>
+                <option value="horreur">Horreur</option>
+                <option value="fantasy">Fantasy</option>
+                <option value="fantastique">Fantastique</option>
+                <option value="policier">Policier</option>
+                <option value="amour">Amour</option>
+            </select>
         </div>
-      </div>
-      <% } %>
 
-      <div class="book-grid">
-        <% if (books.length > 0) { %> <% books.forEach(book => { %>
-        <div class="book-card">
-          <img src="<%= book.cover %>" alt="image" class="book-cover" />
-          <div class="book-info">
-            <h3><%= book.title %></h3>
-            <p>Auteur : <%= book.author %></p>
-            <p>ISBN : <%= book.ISBN %></p>
-            <p><%= book.pages %> Pages</p>
-          </div>
+        <!-- Contenu principal -->
+        <div class="book-list">
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Rechercher un livre..." />
+                <button class="submit-btn">Rechercher</button>
+            </div>
 
-          <div class="book-actions">
-            <a href="/book-detail/<%= book._id %>" class="detail-btn"
-              >Détails</a
-            >
-            <% if (user && user.role === 'admin') { %>
-            <a href="/update-book/<%= book._id %>" class="edit-btn">Modifier</a>
-            <form
-              action="/books/<%= book._id %>?_method=DELETE"
-              method="POST"
-              style="display: inline"
-            >
-              <button
-                type="submit"
-                class="delete-btn"
-                onclick="return confirm('Voulez-vous vraiment supprimer ce livre ?')"
-              >
-                Supprimer
-              </button>
-            </form>
-            <% } %>
-          </div>
+            <div id="bookContainer" class="book-grid">
+              <% books.forEach(book => { %>
+                <div class="book-card" data-genre="<%= book.genre %>">
+                  <img src="<%= book.cover %>" alt="Couverture du livre" class="book-cover" />
+                  <div class="book-info">
+                    <h3><%= book.title %></h3>
+                    <p>Auteur : <%= book.author %></p>
+                    <p>Genre : <%= book.genre %></p>
+                    <p>ISBN : <%= book.ISBN %></p>
+                    <p><%= book.pages %> Pages</p>
+                  </div>
+                  <div class="book-actions">
+                    <!-- Bouton Détails pour tous -->
+                    <a href="/book-detail/<%= book._id %>" class="detail-btn">Détails</a>
+                    
+                    <!-- Boutons admin : Modifier et Supprimer -->
+                    <% if (user && user.role === 'admin') { %>
+                      <a href="/update-book/<%= book._id %>" class="edit-btn">Modifier</a>
+                      <form action="/book-detail/<%= book._id %>?_method=DELETE" method="POST" style="display:inline;">
+                        <button type="submit" class="delete-btn">Supprimer</button>
+                      </form>
+                    <% } %>
+                  </div>
+                </div>
+              <% }); %>
+              
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination">
+                <button id="prevPage" disabled>◀ Précédent</button>
+                <span id="pageNumber">1</span>
+                <button id="nextPage">Suivant ▶</button>
+            </div>
         </div>
-        <% }); %> <% } else { %>
-        <p>Aucun livre disponible pour le moment.</p>
-        <% } %>
-      </div>
     </div>
 
     <script>
-      document
-        .getElementById("searchInput")
-        .addEventListener("input", function () {
-          let filter = this.value.toLowerCase();
-          let books = document.querySelectorAll(".book-card");
+        const searchInput = document.getElementById("searchInput");
+        const genreFilter = document.getElementById("genreFilter");
+        const bookContainer = document.getElementById("bookContainer");
+        const books = Array.from(document.querySelectorAll(".book-card"));
+        let currentPage = 1;
+        const booksPerPage = 10;
+        let filteredBooks = [...books];
 
-          books.forEach((book) => {
-            let title = book.querySelector("h3").innerText.toLowerCase();
-            book.style.display = title.includes(filter) ? "" : "none";
-          });
+        function filterBooks() {
+            const filter = searchInput.value.toLowerCase();
+            const genre = genreFilter.value;
+
+            filteredBooks = books.filter(book => {
+                const title = book.querySelector("h3").innerText.toLowerCase();
+                const bookGenre = book.getAttribute("data-genre");
+                return (title.includes(filter) || filter === "") && (bookGenre === genre || genre === "");
+            });
+
+            currentPage = 1;
+            updatePagination();
+        }
+
+        function updatePagination() {
+            bookContainer.innerHTML = "";
+            const start = (currentPage - 1) * booksPerPage;
+            const end = start + booksPerPage;
+            filteredBooks.slice(start, end).forEach(book => bookContainer.appendChild(book));
+
+            document.getElementById("prevPage").disabled = currentPage === 1;
+            document.getElementById("nextPage").disabled = end >= filteredBooks.length;
+            document.getElementById("pageNumber").innerText = currentPage;
+        }
+
+        document.getElementById("prevPage").addEventListener("click", () => {
+            if (currentPage > 1) currentPage--;
+            updatePagination();
         });
+
+        document.getElementById("nextPage").addEventListener("click", () => {
+            if (currentPage * booksPerPage < filteredBooks.length) currentPage++;
+            updatePagination();
+        });
+
+        searchInput.addEventListener("input", filterBooks);
+        genreFilter.addEventListener("change", filterBooks);
+        updatePagination();
     </script>
-  </body>
+</body>
 </html>

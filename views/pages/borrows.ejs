@@ -1,107 +1,88 @@
 <!DOCTYPE html>
 <html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestion des Emprunts - Bibliothèque</title>
-    <link rel="stylesheet" href="/css/borrows.css" />
-  </head>
-  <body>
+    <link rel="stylesheet" href="/css/borrows.css">
+</head>
+<body>
     <header>
-      <h1>Liste des Emprunts</h1>
+        <h1>Liste des Emprunts</h1>
     </header>
-    <div class="search-bar">
-      <input
-        type="text"
-        id="searchInput"
-        placeholder="Rechercher un livre ou un emprunteur..."
-      />
-    </div>
     <div class="container">
-      <table>
-        <thead>
-          <tr>
-            <th>Livre</th>
-            <th>Emprunteur</th>
-            <th>Date d'emprunt</th>
-            <th>Date de retour</th>
-            <th>Statut</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody id="borrowTable">
-          <% if (borrows.length === 0) { %>
-          <tr>
-            <td colspan="6">Aucun emprunt trouvé.</td>
-          </tr>
-          <% } else { %> <% borrows.forEach(borrow => { %>
-          <tr>
-            <td><%= borrow.book.title %></td>
-            <td><%= borrow.user.first %> <%= borrow.user.last %></td>
-            <td><%= new Date(borrow.date_borrow).toLocaleDateString() %></td>
-            <td>
-              <%= borrow.date_return ? new
-              Date(borrow.date_return).toLocaleDateString() : 'Non défini' %>
-            </td>
-            <td>
-              <% if (borrow.status === 'En cours') { %>
-                <span style="color: orange">En cours</span>
-              <% } else if (borrow.status === 'Retourné') { %>
-                <span style="color: green">Retourné</span>
-              <% } else if (borrow.status === "Validé") { %>
-                <span style="color: blue">Validé</span>
-              <% } else if (borrow.status === "non valide") { %>
-                <span style="color: red">Non valide</span>
-              <% } %>
-            </td>
-            
-            <% if (user && user.role === 'admin') { %>
-            <td>
-              <div class="actions">
-                <a href="/borrow-details/<%= borrow._id %>">Détails</a>
-                <form
-                  action="/borrows/<%= borrow._id %>?_method=DELETE"
-                  method="POST"
-                  style="display: inline"
-                >
-                  <button
-                    type="submit"
-                    class="delete-btn"
-                    onclick="return confirm('Voulez-vous vraiment supprimer cet emprunt ?')"
-                  >
-                    🗑 Supprimer
-                  </button>
-                </form>
-              </div>
-            </td>
-            <% } else { %>
-            <td>-</td>
-            <% } %>
-          </tr>
-          <% }) %> <% } %>
-        </tbody>
-      </table>
+        <table>
+            <thead>
+                <tr>
+                    <th>Livre</th>
+                    <th>Emprunteur</th>
+                    <th>Date d'emprunt</th>
+                    <th>Date de retour</th>
+                    <th>Statut</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="borrowTable">
+                <% if (borrows.length === 0) { %>
+                <tr>
+                    <td colspan="6">Aucun emprunt trouvé.</td>
+                </tr>
+                <% } else { %> <% borrows.forEach(borrow => { %>
+                <tr>
+                    <td><%= borrow.book.title %></td>
+                    <td><%= borrow.user.first %> <%= borrow.user.last %></td>
+                    <td><%= new Date(borrow.date_borrow).toLocaleDateString() %></td>
+                    <td><%= borrow.date_return ? new Date(borrow.date_return).toLocaleDateString() : 'Non défini' %></td>
+                    <td>
+                        <span class="status <%= borrow.status.toLowerCase().replace(' ', '-') %>">
+                            <%= borrow.status %>
+                        </span>
+                    </td>
+                    <td>
+                        <a href="/borrow-details/<%= borrow._id %>" class="details-btn">Détails</a>
+                        <form action="/borrows/<%= borrow._id %>?_method=DELETE" method="POST" style="display: inline">
+                            <button type="submit" class="delete-btn" onclick="return confirm('Voulez-vous vraiment supprimer cet emprunt ?')">🗑 Supprimer</button>
+                        </form>
+                    </td>
+                </tr>
+                <% }) %> <% } %>
+            </tbody>
+        </table>
+
+        <div class="pagination">
+            <button id="prevPage">Précédent</button>
+            <span id="pageNumber">1</span>
+            <button id="nextPage">Suivant</button>
+        </div>
     </div>
+
     <script>
-      document
-        .getElementById("searchInput")
-        .addEventListener("input", function () {
-          let filter = this.value.toLowerCase();
-          document.querySelectorAll("#borrowTable tr").forEach((row) => {
-            let titleCell =
-              row.cells.length > 0
-                ? row.cells[0].textContent.toLowerCase()
-                : "";
-            let userCell =
-              row.cells.length > 1
-                ? row.cells[1].textContent.toLowerCase()
-                : "";
-            row.style.display =
-              titleCell.includes(filter) || userCell.includes(filter)
-                ? ""
-                : "none";
-          });
+        let currentPage = 1;
+        const rowsPerPage = 5;
+        const rows = document.querySelectorAll("#borrowTable tr");
+
+        function showPage(page) {
+            rows.forEach((row, index) => {
+                row.style.display = (index >= (page - 1) * rowsPerPage && index < page * rowsPerPage) ? "" : "none";
+            });
+            document.getElementById("pageNumber").textContent = page;
+        }
+
+        document.getElementById("prevPage").addEventListener("click", function() {
+            if (currentPage > 1) {
+                currentPage--;
+                showPage(currentPage);
+            }
         });
+
+        document.getElementById("nextPage").addEventListener("click", function() {
+            if (currentPage < Math.ceil(rows.length / rowsPerPage)) {
+                currentPage++;
+                showPage(currentPage);
+            }
+        });
+
+        showPage(currentPage);
     </script>
-  </body>
+</body>
 </html>

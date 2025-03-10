@@ -1,62 +1,74 @@
 <!DOCTYPE html>
 <html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Détails de l'Emprunt - Bibliothèque</title>
-    <link rel="stylesheet" href="/css/borrow-details.css" />
-  </head>
-  <body>
+    <link rel="stylesheet" href="/css/borrow-details.css">
+</head>
+<body>
     <header>
-      <h1>Détails de l'Emprunt</h1>
+        <h1>Détails de l'Emprunt</h1>
     </header>
 
     <div class="container">
-      <table>
-        <thead>
-          <tr>
-            <th>Livre</th>
-            <th>Emprunteur</th>
-            <th>Date d'emprunt</th>
-            <th>Date de retour</th>
-            <th>Statut</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody id="borrowTable">
-          <% if (!borrow) { %>
-          <tr>
-            <td colspan="6">Emprunt introuvable.</td>
-          </tr>
-          <% } else { %>
-            <tr>
-              <td><%= borrow.book.title %></td>
-              <td><%= borrow.user.first %> <%= borrow.user.last %></td>
-              <td><%= new Date(borrow.date_borrow).toLocaleDateString() %></td>
-              <td><%= new Date(borrow.date_return).toLocaleDateString() %></td>
-              <td>
-                <label class="<% if (borrow.status === 'En cours') { %>status-en-cours<% } else if (borrow.status === 'Retourné') { %>status-retourne<% } else if (borrow.status === 'Validé') { %>status-valide<% } else { %>status-non-valide<% } %>">
-                  <%= borrow.status %>
-                </label>
-              </td>
-              <td>
-                <form action="/borrow-details/<%= borrow._id %>" method="post" style="display: inline">
-                  <select name="status">
-                    <option value="En cours" <% if (borrow.status === 'En cours') { %>selected<% } %>>En cours</option>
-                    <option value="Retourné" <% if (borrow.status === 'Retourné') { %>selected<% } %>>Retourné</option>
-                    <option value="Validé" <% if (borrow.status === 'Validé') { %>selected<% } %>>Validé</option>
-                    <option value="Non valide" <% if (borrow.status === 'Non valide') { %>selected<% } %>>Non valide</option>
-                  </select>
-                  <button type="submit" class="delete-btn" onclick="return confirm('Voulez-vous vraiment modifier cet emprunt ?')">Modifier</button>
-                </form>
-              </td>
-            </tr>
-          <% } %>
-        </tbody>
-      </table>
+        <table>
+            <thead>
+                <tr>
+                    <th>Livre</th>
+                    <th>Emprunteur</th>
+                    <th>Date d'emprunt</th>
+                    <th>Date de retour</th>
+                    <th>Statut</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (!borrow) { %>
+                <tr>
+                    <td colspan="6">Emprunt introuvable.</td>
+                </tr>
+                <% } else { %>
+                <tr>
+                    <td><%= borrow.book.title %></td>
+                    <td><%= borrow.user.first %> <%= borrow.user.last %></td>
+                    <td><%= new Date(borrow.date_borrow).toLocaleDateString() %></td>
+                    <td><%= new Date(borrow.date_return).toLocaleDateString() %></td>
+                    <td>
+                        <span class="status <% if (borrow.status === 'En cours') { %>status-en-cours<% } else if (borrow.status === 'Retourné') { %>status-retourne<% } else if (borrow.status === 'Validé') { %>status-valide<% } else { %>status-non-valide<% } %>">
+                            <%= borrow.status %>
+                        </span>
+                    </td>
+                    <td>
+                        <form action="/borrow-details/<%= borrow._id %>" method="post">
+                            <select name="status">
+                                <option value="En cours" <% if (borrow.status === 'En cours') { %>selected<% } %>>En cours</option>
+                                <option value="Retourné" <% if (borrow.status === 'Retourné') { %>selected<% } %>>Retourné</option>
+                                <option value="Validé" <% if (borrow.status === 'Validé') { %>selected<% } %>>Validé</option>
+                                <option value="Non valide" <% if (borrow.status === 'Non valide') { %>selected<% } %>>Non valide</option>
+                            </select>
+                            <button type="submit" class="update-btn" onclick="return confirm('Voulez-vous vraiment modifier cet emprunt ?')">Modifier</button>
+                        </form>
+                    </td>
+                </tr>
+                <% } %>
+            </tbody>
+        </table>
     </div>
+
+    <div class="notification" id="notification">Modification enregistrée ✅</div>
+
     <div>
         <a href="/borrows" class="button">Retour aux emprunts</a>
-      </div>
-  </body>
+    </div>
+
+    <script>
+        document.querySelector('form').addEventListener('submit', function() {
+            document.getElementById('notification').style.display = 'block';
+            setTimeout(() => {
+                document.getElementById('notification').style.display = 'none';
+            }, 3000);
+        });
+    </script>
+</body>
 </html>

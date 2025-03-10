@@ -1,48 +1,166 @@
 /* Dashboard étudiant */
-.dashboard-container {
-    padding: 50px;
+
+/* Réinitialisation */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Corps de page */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  color: #264653; /* Bleu foncé pour le texte */
+  padding: 20px;
+}
+
+/* Conteneur principal */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* En-tête */
+header {
+  background-color: #264653; /* BLEU */
+  padding: 20px;
+  text-align: center;
+}
+
+header h1 {
+  color: #e9c46a; /* JAUNE */
+  font-size: 2em;
+}
+.user-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10%;
+  margin-bottom: 50px;
+}
+.user-avatar {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex; /* Active Flexbox */
+    align-items: center; /* Centre verticalement */
+    justify-content: center; /* Centre horizontalement */
+    margin: 0 5%; /* Centre le conteneur lui-même */
+  }
+  
+  .user-avatar img {
+    width: 100%; /* Assurez-vous que l'image remplit le conteneur */
+    height: 100%; /* Ajuste la hauteur */
+    object-fit: cover; /* Garde un bon cadrage de l’image */
+  }
+  
+/* Tableau des utilisateurs */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background-color: #2a9d8f; /* VERT */
+  color: #fff;
+}
+
+thead th {
+  padding: 15px;
+  text-align: left;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+tbody tr:hover {
+  background-color: #f4a261; /* ORANGE */
+  color: #264653;
+}
+
+tbody td {
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Avatar */
+tbody img {
+  border-radius: 50%;
+}
+
+/* Liens d'actions */
+a {
+  text-decoration: none;
+  color: #2a9d8f;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Adaptatif pour mobiles */
+@media (max-width: 768px) {
+  .search-bar {
+    flex-direction: column;
+  }
+
+  .search-bar input[type="text"],
+  .search-bar .submit-btn {
+    width: 100%;
+    margin-bottom: 10px;
+    border-radius: 4px;
+  }
 }
 
 .current-borrows,
 .favorite-books {
-    margin-bottom: 50px;
+  margin-bottom: 50px;
 }
 
 .current-borrows h2,
 .favorite-books h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
+  font-size: 24px;
+  margin-bottom: 20px;
 }
 
 .favorite-list {
-    list-style: none;
-    padding-left: 0;
+  list-style: none;
+  padding-left: 0;
 }
 
 .favorite-list li {
-    font-size: 18px;
-    margin-bottom: 10px;
-    padding: 10px;
-    background-color: #f4f4f4;
-    border-radius: 5px;
+  font-size: 18px;
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #f4f4f4;
+  border-radius: 5px;
 }
 
 .borrow-table {
-    width: 100%;
-    border-collapse: collapse;
+  width: 100%;
+  border-collapse: collapse;
 }
 
 .borrow-table th,
 .borrow-table td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
 }
 
 .borrow-table th {
-    background-color: #f2f2f2;
+  background-color: #f2f2f2;
 }
 
 .borrow-table tr:hover {
-    background-color: #f9f9f9;
+  background-color: #f9f9f9;
 }
