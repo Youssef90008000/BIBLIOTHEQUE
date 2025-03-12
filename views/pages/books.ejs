@@ -5,150 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Livres - Bibliothèque</title>
     <link rel="stylesheet" href="/css/books.css">
-    <style>
-        /* Styles de base */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: white;
-            color: #333;
-        }
 
-        .container {
-            display: flex;
-            width: 90%;
-            max-width: 1200px;
-            margin: auto;
-            padding: 20px;
-        }
-
-        header {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #e9c46a;
-        }
-
-        /* Sidebar */
-        .sidebar {
-            width: 250px;
-            padding: 20px;
-            background: #f4f4f4;
-        }
-
-        .sidebar select {
-            width: 100%;
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-
-        /* Contenu principal */
-        .book-list {
-            flex-grow: 1;
-            padding: 20px;
-        }
-
-        .search-bar {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
-
-        .search-bar input {
-            padding: 10px;
-            width: 300px;
-            border: 1px solid #e9c46a;
-            border-radius: 5px;
-            margin-right: 10px;
-            background-color: white;
-            color: black;
-        }
-
-        .submit-btn {
-            padding: 10px 15px;
-            background-color: #2a9d8f;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .book-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        .book-card {
-            width: calc(33.333% - 20px);
-            background: white;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Pagination */
-        .pagination {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .pagination button {
-            padding: 8px 12px;
-            margin: 5px;
-            border: none;
-            background: #007bff;
-            color: white;
-            cursor: pointer;
-        }
-
-        .pagination button:disabled {
-            background: gray;
-            cursor: not-allowed;
-        }
-
-        /* Responsive */
-        @media (max-width: 996px) {
-            .container {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .sidebar {
-                width: 100%;
-                margin-bottom: 20px;
-            }
-
-            .book-grid {
-                justify-content: center;
-            }
-
-            .book-card {
-                width: calc(50% - 20px);
-            }
-        }
-
-        @media (max-width: 600px) {
-            .book-card {
-                width: 100%;
-            }
-
-            .search-bar {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .search-bar input {
-                width: 100%;
-                margin-bottom: 10px;
-            }
-        }
-    </style>
 </head>
 <body>
     <header>
-        <h1>Livres Disponibles</h1>
+        <nav>
+            <div class="logo">
+                <h1>Livres Disponibles</h1>
+            </div>
+            <ul class="nav-links">
+              <li><a href="/admin-index">Accueil</a></li>
+              <li><a href="/books">Livres</a></li>
+              <li><a href="/borrows ">Emprunts</a></li>
+              <li><a href="/profils-users">Profil</a></li>
+              <li><a href="/logout">Deconnexion</a></li>
+            </ul>
+          </nav>
     </header>
 
     <div class="container">

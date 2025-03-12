@@ -250,14 +250,16 @@ exports.forgotPassword = (req, res, next) => {
 
 //Logout a user
 
-exports.logoutUser = async (req, res) => {
-  try {
-    req.session.destroy();
-    res.redirect("/login");
-    res.status(200).json({ message: "User logged out" });
-  } catch (err) {
-    res.status(404).json({ message: err.message });
-  }
+exports.logoutUser = (req, res) => {
+  req.session.destroy((err) => {
+      if(err) {
+          console.error("Erreur lors de la déconnexion:", err);
+          return res.status(500).json({ message: "Erreur lors de la déconnexion" });
+      }
+      res.clearCookie('connect.sid');
+      res.redirect('/?message=Vous avez été déconnecté avec succès');
+  });
 };
+
 
 // Description: Ce fichier contient les fonctions qui sont utilisées pour interagir avec le modèle d'utilisateur.

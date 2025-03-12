@@ -21,6 +21,7 @@ body {
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
 }
 
 /* En-tête */
@@ -33,6 +34,34 @@ header {
 header h1 {
   color: #E9C46A; /* JAUNE */
   font-size: 2em;
+}
+
+/* Navigation */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+}
+
+.nav-links li {
+  margin-left: 20px;
+}
+
+.nav-links a {
+  color: #E9C46A; /* JAUNE */
+  text-decoration: none;
+  padding: 8px 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.nav-links a:hover {
+  background-color: #F4A261; /* ORANGE */
 }
 
 /* Barre de recherche */
@@ -166,13 +195,85 @@ a:hover {
 /* Adaptatif pour mobiles */
 @media (max-width: 768px) {
   .search-bar {
-    flex-direction: column;
+      flex-direction: column;
   }
 
   .search-bar input[type="text"],
   .search-bar .submit-btn {
-    width: 100%;
-    margin-bottom: 10px;
-    border-radius: 4px;
+      width: 100%;
+      margin-bottom: 10px;
+      border-radius: 4px;
+  }
+
+  .add-user {
+      text-align: center;
+  }
+
+  /* Augmente la taille de police pour une meilleure lisibilité sur les petits écrans */
+  body,
+  table,
+  input,
+  button {
+      font-size: 16px;
+  }
+
+  /* Ajuste le padding dans le tableau pour éviter le débordement */
+  thead th,
+  tbody td {
+      padding: 10px;
+  }
+
+  /* Navigation responsive */
+  .nav {
+      width: 80%;
+  }
+
+  .nav-links {
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .nav-links li {
+      margin-left: 0;
+      margin-bottom: 10px;
+  }
+}
+
+/* Pour les téléphones (largeur maximale de 480px) */
+@media (max-width: 480px) {
+  header h1 {
+      font-size: 1.5em;
+  }
+
+  .container {
+      padding: 10px;
+  }
+
+  .search-bar {
+      padding: 10px;
+  }
+
+  /* Réduit davantage la taille de police pour les très petits écrans */
+  body,
+  table,
+  input,
+  button {
+      font-size: 14px;
+  }
+
+  /* Réduit encore le padding du tableau */
+  thead th,
+  tbody td {
+      padding: 8px;
+  }
+
+  /* Empêche le texte de wrap dans les actions */
+  .actions {
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .actions a {
+      margin-bottom: 5px;
   }
 }

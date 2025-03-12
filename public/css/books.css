@@ -1,4 +1,5 @@
-/* Styles généraux */
+/* Styles de base */
+
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -10,25 +11,52 @@ body {
 /* Conteneur principal */
 .container {
   display: flex;
-  flex-wrap: wrap;
   width: 90%;
   max-width: 1200px;
   margin: auto;
   padding: 20px;
+  flex-wrap: wrap;
 }
 
 /* En-tête */
 header {
-  width: 100%;
   background-color: #264653; /* BLEU */
-  padding: 20px 0;
+  padding: 20px;
   text-align: center;
   margin-bottom: 20px;
 }
 
 header h1 {
-  color: #E9C46A; /* JAUNE */
+  color: #e9c46a;
   font-size: 2em;
+}
+
+/* Navigation */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+}
+
+.nav-links li {
+  margin-left: 20px;
+}
+
+.nav-links a {
+  color: #e9c46a;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.nav-links a:hover {
+  background-color: #f4a261;
 }
 
 /* Sidebar */
@@ -45,7 +73,7 @@ header h1 {
   border: 1px solid #ccc;
 }
 
-/* Liste de livres */
+/* Contenu principal */
 .book-list {
   flex-grow: 1;
   padding: 20px;
@@ -81,7 +109,7 @@ header h1 {
   background-color: #1f7a70;
 }
 
-/* Grille des livres */
+/* Grille de livres */
 .book-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -118,8 +146,8 @@ header h1 {
   gap: 10px;
   justify-content: center;
 }
-/* Boutons personnalisés avec les couleurs demandées */
 
+/* Boutons personnalisés avec les couleurs demandées */
 /* Bouton Détails (BLEU) */
 .detail-btn {
   background-color: #264653;
@@ -131,6 +159,7 @@ header h1 {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
+
 .detail-btn:hover {
   background-color: #1f3f54; /* Teinte légèrement plus foncée */
 }
@@ -138,7 +167,7 @@ header h1 {
 /* Boutons Soumettre / Emprunter (VERT) */
 .submit-btn,
 .borrow-btn {
-  background-color: #2A9D8F;
+  background-color: #2a9d8f;
   color: white;
   padding: 10px 15px;
   border: none;
@@ -147,6 +176,7 @@ header h1 {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
+
 .submit-btn:hover,
 .borrow-btn:hover {
   background-color: #238f7b; /* Légère variation */
@@ -154,7 +184,7 @@ header h1 {
 
 /* Bouton Modifier (JAUNE) */
 .edit-btn {
-  background-color: #E9C46A;
+  background-color: #e9c46a;
   color: white;
   padding: 10px 15px;
   border: none;
@@ -163,13 +193,14 @@ header h1 {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
+
 .edit-btn:hover {
   background-color: #d1b75e;
 }
 
 /* Bouton Supprimer (ROUGE) */
 .delete-btn {
-  background-color: #E76F51;
+  background-color: #e76f51;
   color: white;
   padding: 10px 15px;
   border: none;
@@ -178,13 +209,14 @@ header h1 {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
+
 .delete-btn:hover {
   background-color: #c6533f;
 }
 
 /* Optionnel : Bouton d'action additionnel (ORANGE) */
 .action-btn {
-  background-color: #F4A261;
+  background-color: #f4a261;
   color: white;
   padding: 10px 15px;
   border: none;
@@ -193,6 +225,7 @@ header h1 {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
+
 .action-btn:hover {
   background-color: #e0894c;
 }
@@ -223,6 +256,8 @@ header h1 {
 }
 
 /* 📱 Responsive Design */
+
+/* Pour les tablettes (largeur maximale de 996px) */
 @media (max-width: 996px) {
   .container {
     flex-direction: column;
@@ -230,27 +265,37 @@ header h1 {
   }
 
   .sidebar {
-    width: 100%;
-    text-align: center;
-    padding: 10px;
+    width: 80%;
+    margin-bottom: 20px;
   }
 
   .book-grid {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    justify-content: center;
   }
 
   .book-card {
+    width: calc(50% - 20px);
+  }
+
+  nav {
+    width: 100%;
+  }
+
+  .nav-links {
     flex-direction: column;
     align-items: center;
-    padding: 10px;
+  }
+
+  .nav-links li {
+    margin-left: 0;
+    margin-bottom: 10px;
   }
 }
 
+/* Pour les téléphones (largeur maximale de 600px) */
 @media (max-width: 600px) {
   .book-card {
     width: 100%;
-    flex-direction: column;
-    align-items: center;
   }
 
   .search-bar {
@@ -259,11 +304,34 @@ header h1 {
   }
 
   .search-bar input {
-    width: 90%;
+    width: 100%;
     margin-bottom: 10px;
   }
 
-  .pagination button {
+  .book-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .book-actions a,
+  .book-actions button {
     width: 100%;
+    margin-bottom: 5px;
+  }
+
+  .sidebar {
+    width: 80%;
+    padding: 10px;
+  }
+
+  .sidebar select {
+    width: 100%;
+  }
+}
+
+/* Pour les très petits écrans (largeur maximale de 400px) */
+@media (max-width: 400px) {
+  .book-grid {
+    grid-template-columns: 1fr; /* Une seule colonne pour les très petits écrans */
   }
 }
